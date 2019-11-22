@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DrawGuessGame</string>
+    <string name="game_title">GAME\nTITLE</string>
+    <string name="button_help">Help</string>
 </resources>
