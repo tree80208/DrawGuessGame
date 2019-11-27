@@ -10,5 +10,6 @@
     <string name="main_register_text">Register new account</string>
     <string name="main_register">SIGN UP</string>
     <string name="main_register_info">Please enter the valid email address and a password</string>
+    <string name="main_display_name">DISPLAY NAME</string>
 <!--    MAIN MENU <END>-->
 </resources>
