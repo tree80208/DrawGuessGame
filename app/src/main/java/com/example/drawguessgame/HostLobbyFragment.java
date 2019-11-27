@@ -32,7 +32,9 @@ public class HostLobbyFragment extends Fragment {
         mAuth =  FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
+
         //TODO:
+        setUserInfo(currentUser);
 
 
         return containerView;
@@ -41,6 +43,8 @@ public class HostLobbyFragment extends Fragment {
     public void setUserInfo(FirebaseUser user){
         String name = user.getDisplayName();
         Uri imageUri = user.getPhotoUrl();
+
+        
 
     }
 
