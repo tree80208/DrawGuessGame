@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">DrawGuessGame</string>
 
-<!--    MAIN MENU-->
+    <!--    MAIN MENU-->
     <string name="main_title">GAME\nTITLE</string>
     <string name="main_login">LOGIN</string>
     <string name="main_help">HELP</string>
@@ -11,5 +11,5 @@
     <string name="main_register">SIGN UP</string>
     <string name="main_register_info">Please enter the valid email address and a password</string>
     <string name="main_display_name">DISPLAY NAME</string>
-<!--    MAIN MENU <END>-->
+    <!--    MAIN MENU <END>-->
 </resources>

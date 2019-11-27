@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         currentUser = mAuth.getCurrentUser();
         //TODO: Launch screen 2
+        System.out.println("OnStart: "+currentUser.toString());
     }
 
     public void buttonLogin(View v){
@@ -76,12 +77,21 @@ public class MainActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             showToast("Login Successful", Toast.LENGTH_SHORT);
                             //TODO: Launch screen 2
+                            launchChooseGameActivity();
+
+
                         }else{
                             Log.d(TAG,"signInWithEmail:failure",task.getException());
                             showToast("Login Unsuccessful", Toast.LENGTH_SHORT);
                         }
                     }
                 });
+    }
+
+    //TODO: NEED to send Authentication information
+    public void launchChooseGameActivity(){
+        Intent intent = new Intent(this, ChooseGameActivity.class);
+        startActivity(intent);
     }
 
     public void showToast(String str, int attr){
