@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -24,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     RegisterFragment frag;
+    Uri imageUri = null;
     private static final String TAG = "EmailPassword";
     final int RESULT_LOAD_IMG = 1;
 
@@ -104,15 +108,38 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            currentUser = mAuth.getCurrentUser();
+                            setProfile();
                             showToast("Sign up successful", Toast.LENGTH_SHORT);
-
                             exitFragment();
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
                             showToast("Register failed.\nPassword should be at least 6 characters.", Toast.LENGTH_LONG);
+                        }
+                    }
+                });
+    }
+
+    public void setProfile(){
+        String name = ((EditText)findViewById(R.id.screen1_register_edit_text_name)).getText().toString();
+
+        if(imageUri == null){
+            imageUri = Uri.parse("android.resource://com.example.drawguessgame/drawable/cat.jpg");
+        }
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .setPhotoUri(imageUri)
+                .build();
+
+        currentUser.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Log.d(TAG, "User profile updated");
                         }
                     }
                 });
@@ -139,11 +166,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(resultCode == RESULT_OK){
             try{
-                Uri imageUri = data.getData();
+                imageUri = data.getData();
                 InputStream imageStream = getContentResolver().openInputStream(imageUri);
                 Bitmap image = BitmapFactory.decodeStream(imageStream);
-//                ImageView view =
-
+                //TODO: RESIZE IMAGE
+                ImageView imageView = (ImageView)findViewById(R.id.screen1_register_profile_img);
+                imageView.setImageBitmap(image);
             } catch (FileNotFoundException e) {
                 showToast("File Not Found",Toast.LENGTH_SHORT);
             }
@@ -156,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
      * Exits the register fragment if the sign up was successful
      */
     public void exitFragment(){
+        imageUri = null;
         String id = ((EditText)findViewById(R.id.screen1_register_edit_text_id)).getText().toString();
         String pwd = ((EditText)findViewById(R.id.screen1_register_edit_text_pwd)).getText().toString();
 
