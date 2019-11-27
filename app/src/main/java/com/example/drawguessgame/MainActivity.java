@@ -2,9 +2,13 @@ package com.example.drawguessgame;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,10 +21,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    public EditText emailID, password;
-    public Button login,signin;
-    FirebaseAuth mFirebaseAuth;
+    FirebaseAuth mAuth;
+    FirebaseUser currentUser;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    private static final String TAG = "EmailPassword";
 
 
     @Override
@@ -28,67 +32,58 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mFirebaseAuth =  FirebaseAuth.getInstance();
-        emailID = findViewById(R.id.screen1_edit_text_id);
-        password = findViewById(R.id.screen1_edit_text_pwd);
-        login = findViewById(R.id.screen1_button_login);
-        signin = findViewById(R.id.screen1_button_sign_in);
+        mAuth =  FirebaseAuth.getInstance();
     }
 
-    public void mainButtonClicked(View v){
-        String email = emailID.getText().toString();
-        String pwd = password.getText().toString();
-        if(email.isEmpty()){
-            emailID.setError("Please enter email id");
-            emailID.requestFocus();
-        }else if(pwd.isEmpty()){
-            password.setError("Please enter password");
-            password.requestFocus();
-        }else if(email.isEmpty() && pwd.isEmpty()){
-            Toast.makeText(this,"Cannot sign in. Please enter email and password",Toast.LENGTH_LONG);
-        }else if(!(email.isEmpty() && pwd.isEmpty())){
-            if(v.getId() == signin.getId()){
-                mFirebaseAuth.createUserWithEmailAndPassword(email,pwd)
-                        .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(!task.isSuccessful()){
-                                    Toast.makeText(MainActivity.this,"SignUp Unsuccessful, Please Try Again",Toast.LENGTH_LONG);
-                                }else{
-                                    Toast.makeText(MainActivity.this,"SignUp Successful",Toast.LENGTH_LONG);
-                                }
-                            }
-                        });
+    @Override
+    public void onStart(){
+        super.onStart();
+        currentUser = mAuth.getCurrentUser();
+        //TODO: Launch screen 2
+    }
 
-            }else if(v.getId() == login.getId()){
+    public void buttonLogin(View v){
+        String email = ((EditText)findViewById(R.id.screen1_edit_text_id)).getText().toString();
+        String password = ((EditText)findViewById(R.id.screen1_edit_text_pwd)).getText().toString();
 
-                mFirebaseAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+        if(email.trim().equals("") || password.trim().equals("")){
+            showToast("Please Enter User ID/PASSWORD",Toast.LENGTH_SHORT);
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            Toast.makeText(MainActivity.this,"Login Unsuccessful",Toast.LENGTH_LONG);
+                        if(task.isSuccessful()){
+                            Log.d(TAG,"signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            showToast("Login Successful", Toast.LENGTH_SHORT);
+                            //TODO: Launch screen 2
                         }else{
-                            Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG);
+                            Log.d(TAG,"signInWithEmail:failure",task.getException());
+                            showToast("Login Unsuccessful", Toast.LENGTH_SHORT);
                         }
                     }
                 });
+    }
 
-//                mAuthStateListener = new FirebaseAuth.AuthStateListener() {
-//                    @Override
-//                    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                        FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
-//                        if(mFirebaseUser != null){
-//                            Toast.makeText(MainActivity.this,"Login Successful",Toast.LENGTH_LONG);
-//                        }else{
-//                            Toast.makeText(MainActivity.this,"Login Unsuccessful",Toast.LENGTH_LONG);
-//                        }
-//
-//
-//                    }
-//                };
-            }
-        }else{
-            Toast.makeText(MainActivity.this,"Error occurred",Toast.LENGTH_LONG);
-        }
+    public void showToast(String str, int attr){
+        Toast toast = Toast.makeText(MainActivity.this,str,attr);
+        toast.setGravity(Gravity.CENTER,0,0);
+        toast.show();
+    }
+
+    public void registerAccount(View v){
+        RegisterFragment frag = new RegisterFragment();
+        frag.setContainerActivity(this);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.screen1_frame,frag);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void signUpNewAccount(View v){
+
     }
 }

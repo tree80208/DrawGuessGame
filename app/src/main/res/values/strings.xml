@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">DrawGuessGame</string>
-    <string name="game_title">GAME\nTITLE</string>
-    <string name="button_help">Help</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+<!--    MAIN MENU-->
+    <string name="main_title">GAME\nTITLE</string>
+    <string name="main_login">LOGIN</string>
+    <string name="main_help">HELP</string>
+    <string name="main_pwd">PASSWORD</string>
+    <string name="main_id">ID</string>
+    <string name="main_register_text">Register new account</string>
+    <string name="main_register">SIGN UP</string>
+    <string name="main_register_info">Please enter the valid email address and a password</string>
+<!--    MAIN MENU <END>-->
 </resources>
