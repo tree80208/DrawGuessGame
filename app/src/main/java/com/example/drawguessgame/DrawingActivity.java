@@ -108,9 +108,7 @@ public class DrawingFragment extends AppCompatActivity {
             }
         });
 
-
-
-
+s
         clearButton = (Button) inflatedView.findViewById(R.id.clearButton);
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +124,6 @@ public class DrawingFragment extends AppCompatActivity {
                 Bitmap bitmap = dv.getBitmap();
             }
         });
-
-
-
 
 
         return inflatedView;
