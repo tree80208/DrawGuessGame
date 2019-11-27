@@ -23,8 +23,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
-    private FirebaseAuth.AuthStateListener mAuthStateListener;
+    RegisterFragment frag;
     private static final String TAG = "EmailPassword";
+
 
 
     @Override
@@ -75,15 +76,55 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void registerAccount(View v){
-        RegisterFragment frag = new RegisterFragment();
+        frag = new RegisterFragment();
         frag.setContainerActivity(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.screen1_frame,frag);
+        transaction.add(R.id.screen1_frame,frag,"REGISTER");
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public void signUpNewAccount(View v){
+    public void signUpNewAccount(View view) {
+        String email = ((EditText)findViewById(R.id.screen1_register_edit_text_id)).getText().toString();
+        String password = ((EditText)findViewById(R.id.screen1_register_edit_text_pwd)).getText().toString();
 
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "createUserWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            showToast("Sign up successful", Toast.LENGTH_SHORT);
+
+                            exitFragment();
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            showToast("Register failed.\nPassword should be at least 6 characters.", Toast.LENGTH_LONG);
+                        }
+                    }
+                });
+    }
+
+    /**
+     * Exits the register fragment if the sign up was successful
+     */
+    public void exitFragment(){
+        String id = ((EditText)findViewById(R.id.screen1_register_edit_text_id)).getText().toString();
+        String pwd = ((EditText)findViewById(R.id.screen1_register_edit_text_pwd)).getText().toString();
+
+        EditText id_placeholder = (EditText) findViewById(R.id.screen1_edit_text_id);
+        EditText pwd_placeholder = (EditText) findViewById(R.id.screen1_edit_text_pwd);
+
+        id_placeholder.setText(id);
+        pwd_placeholder.setText(pwd);
+
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.remove(frag);
+        transaction.commit();
     }
 }
