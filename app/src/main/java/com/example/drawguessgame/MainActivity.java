@@ -16,6 +16,8 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -101,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
         String email = ((EditText)findViewById(R.id.screen1_register_edit_text_id)).getText().toString();
         String password = ((EditText)findViewById(R.id.screen1_register_edit_text_pwd)).getText().toString();
 
+        final String name = ((EditText)findViewById(R.id.screen1_register_edit_text_name)).getText().toString();
+
+        if(email.trim().equals("") || password.trim().equals("") || name.trim().equals("")){
+            showToast("Please fill out all information", Toast.LENGTH_SHORT);
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -109,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "createUserWithEmail:success");
                             currentUser = mAuth.getCurrentUser();
-                            setProfile();
+                            setProfile(name);
                             showToast("Sign up successful", Toast.LENGTH_SHORT);
                             exitFragment();
 
@@ -122,8 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void setProfile(){
-        String name = ((EditText)findViewById(R.id.screen1_register_edit_text_name)).getText().toString();
+    public void setProfile(String name){
 
         if(imageUri == null){
             imageUri = Uri.parse("android.resource://com.example.drawguessgame/drawable/cat.jpg");
