@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "322629283803",
+    "firebase_url": "https://drawguessgame-19fe2.firebaseio.com",
+    "project_id": "drawguessgame-19fe2",
+    "storage_bucket": "drawguessgame-19fe2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322629283803:android:3858eb7e348289e11041fe",
+        "android_client_info": {
+          "package_name": "com.example.drawguessgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322629283803-2906rf0b441921m6jbbr87ntesq8l3kl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drawguessgame",
+            "certificate_hash": "3da5f5d3c53d3cf4ae48b47fea1799ec2aa17c71"
+          }
+        },
+        {
+          "client_id": "322629283803-4s3tb2rt0fuj59hcpcb1b7ku6g0c65e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGf8FXIaOoIt8N3JdXCQgwmq6IQIvuC4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322629283803-4s3tb2rt0fuj59hcpcb1b7ku6g0c65e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
