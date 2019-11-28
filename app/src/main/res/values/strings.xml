@@ -12,4 +12,11 @@
     <string name="main_register_info">Please enter the valid email address and a password</string>
     <string name="main_display_name">DISPLAY NAME</string>
     <!--    MAIN MENU <END>-->
+
+    <string name="button_small">S</string>
+    <string name="button_medium">M</string>
+    <string name="button_large">L</string>
+    <string name="button_share">SHARE</string>
+    <string name="button_clear">CLEAR</string>
+
 </resources>

@@ -3,6 +3,7 @@ package com.example.drawguessgame;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -49,6 +50,11 @@ public class ChooseGameActivity extends AppCompatActivity {
         transaction.replace(R.id.maincontainer, joinLobby);
         transaction.commit();
 
+    }
+
+    public void startGameButton(View v){
+        Intent intent = new Intent(this,DrawingActivity.class);
+        startActivity(intent);
     }
     @Override
     public void onDestroy(){
