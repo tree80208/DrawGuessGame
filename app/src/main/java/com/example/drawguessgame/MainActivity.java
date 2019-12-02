@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         currentUser = mAuth.getCurrentUser();
         //TODO: Launch screen 2
-        System.out.println("OnStart: "+currentUser.toString());
+//        System.out.println("OnStart: "+currentUser.toString());
     }
 
     public void buttonLogin(View v){
