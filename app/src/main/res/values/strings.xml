@@ -19,8 +19,4 @@
     <string name="button_share">SHARE</string>
     <string name="button_clear">CLEAR</string>
 
-<!--    LEADER BOARD-->
-    <string name="leader_board_title">LEADER BOARD</string>
-<!--    LEADER BOARD <END>-->
-
 </resources>
