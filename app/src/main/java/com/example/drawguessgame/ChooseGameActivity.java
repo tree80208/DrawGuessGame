@@ -18,6 +18,8 @@ public class ChooseGameActivity extends AppCompatActivity {
     JoinLobbyFragment joinLobby;
     HostLobbyFragment hostLobby;
     TypeCodeFragment codeFragment;
+
+    SoundRunnable soundRunnable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,35 @@ public class ChooseGameActivity extends AppCompatActivity {
         System.out.println("Oncreate ChooseGameActivity: "+currentUser.toString());
 
     }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        System.out.println("MainActivity: onResume");
+        playBackgroundMusic();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        System.out.println("MainActivity: onPause");
+        stopBackgroundMusic();
+    }
+
+    public void stopBackgroundMusic(){
+        soundRunnable.stopMusic();
+    }
+
+    public void playBackgroundMusic(){
+        soundRunnable = new SoundRunnable(
+                this, R.raw.lovable_clown_sit_com,250);
+
+        (new Thread(soundRunnable)).start();
+    }
+
+
+
     public void createGame(View v){
         hostLobby = new HostLobbyFragment();
         hostLobby.setContainerActivity(this);

@@ -29,9 +29,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
@@ -40,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
     Uri imageUri = null;
     private static final String TAG = "EmailPassword";
     final int RESULT_LOAD_IMG = 1;
-
-
+    SoundRunnable soundRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +52,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth =  FirebaseAuth.getInstance();
-        
+        //FOR TESTING PURPOSE
+//        Intent intent = new Intent(this,LeaderBoardActivity.class);
+//        startActivity(intent);
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        System.out.println("MainActivity: onResume");
+        playBackgroundMusic();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        System.out.println("MainActivity: onPause");
+        stopBackgroundMusic();
+    }
+
+    public void stopBackgroundMusic(){
+        soundRunnable.stopMusic();
+    }
+
+    public void playBackgroundMusic(){
+        soundRunnable = new SoundRunnable(
+                this, R.raw.scary_island,250);
+
+        (new Thread(soundRunnable)).start();
     }
 
     @Override
     public void onStart(){
         super.onStart();
-        currentUser = mAuth.getCurrentUser();
         //TODO: Launch screen 2
 //        System.out.println("OnStart: "+currentUser.toString());
     }
@@ -130,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
                             currentUser = mAuth.getCurrentUser();
                             setProfile(name);
                             showToast("Sign up successful", Toast.LENGTH_SHORT);
+                            createUserInDatabase(name);
                             exitFragment();
 
                         } else {
@@ -139,6 +169,20 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+
+    public void createUserInDatabase(String name){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        String path = "User%Info/Profile%Names";
+        DatabaseReference ref = database.getReference(path);
+
+
+        Map<String, Object> users = new HashMap<>();
+        users.put(path, new UserProfile(name, "0"));
+
+        ref.updateChildren(users);
+        System.out.println("DATABASE UPDATED");
     }
 
     public void setProfile(String name){

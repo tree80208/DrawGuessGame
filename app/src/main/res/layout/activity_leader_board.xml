@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/leader_board"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,18 +14,31 @@
         android:layout_height="60dp"
 
 
-        android:layout_margin="20dp"
-
+        android:layout_marginTop="50dp"
         android:gravity="center"
+        android:textAlignment="center"
         android:text="@string/leader_board_title"
         android:textSize="40dp"
         />
 
+    <Button
+        android:id="@+id/leader_board_share_button"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+
+        android:layout_gravity="center"
+        android:textAlignment="center"
+        android:text="@string/leader_board_share"
+        android:layout_marginTop="20dp"
+        android:onClick="shareImage"
+
+        />
     <ListView
         android:id="@+id/leader_board_list_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_margin="20dp"
         />
+
 
 </LinearLayout>
