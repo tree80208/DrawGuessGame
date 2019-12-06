@@ -59,8 +59,8 @@ public class HostLobbyFragment extends Fragment {
 
         System.out.println("\n\nHostLobbyFragment: username: "+name+"\n\n");
         //TODO: Need to setup Bitmap
-//        userName.setText(name);
-//      userImage.setImageBitmap(userBitmap);intStackTrace();
+        userName.setText(name);
+//        userImage.setImageBitmap(userBitmap);intStackTrace();
 
 
     }

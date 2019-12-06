@@ -12,6 +12,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -37,6 +38,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
@@ -61,14 +63,14 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         System.out.println("MainActivity: onResume");
-        playBackgroundMusic();
+//        playBackgroundMusic();
     }
 
     @Override
     public void onPause(){
         super.onPause();
         System.out.println("MainActivity: onPause");
-        stopBackgroundMusic();
+//        stopBackgroundMusic();
     }
 
     public void stopBackgroundMusic(){
@@ -174,14 +176,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void createUserInDatabase(String name){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        String path = "User%Info/Profile%Names";
-        DatabaseReference ref = database.getReference(path);
+
+
+        DatabaseReference databaseReference = database.getReference();
+        String path = "UserInfo/"+name;
 
 
         Map<String, Object> users = new HashMap<>();
-        users.put(path, new UserProfile(name, "0"));
+        users.put(path, new User(name, "0",""));
 
-        ref.updateChildren(users);
+        databaseReference.updateChildren(users);
         System.out.println("DATABASE UPDATED");
     }
 

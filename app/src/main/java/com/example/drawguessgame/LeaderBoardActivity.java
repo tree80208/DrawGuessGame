@@ -35,7 +35,7 @@ import java.util.List;
 
 public class LeaderBoardActivity extends AppCompatActivity {
 
-    String firebase_url = "https://drawguessgame-19fe2.firebaseio.com/User%20Info.json";
+    String firebase_url = "https://drawguessgame-19fe2.firebaseio.com/UserInfo.json";
     List<UserProfile> profiles;
     Activity itself;
 
@@ -84,26 +84,22 @@ public class LeaderBoardActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(JSONObject json){
             profiles = new ArrayList<>();
-            profiles.add(new UserProfile("User Name", "Score"));
+//            profiles.add(new UserProfile("User Name", "Score"));
 
             int index = 0;
             String name;
             int score;
 
 
-            JSONObject jsonArray = null;
             try {
-                System.out.println("WORKING?");
-                jsonArray = json.getJSONObject("Profile Names");
-                System.out.println("WORKING?");
 
 
-                Iterator<String> iterator = jsonArray.keys();
+                Iterator<String> iterator = json.keys();
                 while (iterator.hasNext()) {
                     String key = iterator.next();
-                    JSONObject curr = jsonArray.getJSONObject(key);
+                    JSONObject curr = json.getJSONObject(key);
                     name = curr.getString("name");
-                    score = curr.getInt("Career high");
+                    score = curr.getInt("score");
                     profiles.add(new UserProfile(name, Integer.toString(score)));
                 }
 
