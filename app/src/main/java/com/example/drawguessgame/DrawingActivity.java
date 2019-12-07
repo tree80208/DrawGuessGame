@@ -79,24 +79,7 @@ public class DrawingActivity extends AppCompatActivity {
 ////
 ////        }
     }
-
-    /**
-     * This function calls the contacts list fragment
-     *  which shows lists of contact and lets the user select
-     *  which person to share with
-     * @param v
-     */
-//    public void onClickShare(View v){
-//        ContactsFragment frag = new ContactsFragment();
-//        frag.setContainerActivity(this);
-//        FragmentTransaction transaction = getSupportFragmentManager()
-//                .beginTransaction();
-//
-//        transaction.add(R.id.screen_layout,frag);
-//
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
+    
 
     /**
      * This function changes the paint brush color

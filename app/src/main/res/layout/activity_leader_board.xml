@@ -53,7 +53,8 @@
             android:layout_gravity="center"
             android:textAlignment="center"
             android:text="@string/leader_board_share"
-            android:onClick="shareImage"/>
+            android:onClick="onClickShare"
+            />
 
 
     </LinearLayout>
