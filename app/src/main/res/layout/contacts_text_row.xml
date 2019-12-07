@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:onClick="clickContact"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/contacts_row_item"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_margin="20dp"
+        android:textSize="30dp"
+        android:textColor="@color/colorPrimaryDark"
+        />
+
+
+
+</LinearLayout>

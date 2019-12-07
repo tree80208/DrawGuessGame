@@ -63,9 +63,9 @@ public class MainActivity extends AppCompatActivity {
         StorageReference riversRef = mStorageRef.child("images/rivers.jpg");
 
         mAuth =  FirebaseAuth.getInstance();
-        //FOR TESTING PURPOSE
-        Intent intent = new Intent(this,LeaderBoardActivity.class);
-        startActivity(intent);
+//        //FOR TESTING PURPOSE
+//        Intent intent = new Intent(this,LeaderBoardActivity.class);
+//        startActivity(intent);
 
     }
     @Override
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
     public void createUserInDatabase(String name){
         this.playername = name;
         if(imageUri == null){
-            imageUri = Uri.parse("android.resource://com.example.drawguessgame/drawable/cat.jpg");
+            imageUri = Uri.parse("android.resource://com.example.drawguessgame/" + R.drawable.cat);
         }
         final StorageReference riversRef = mStorageRef.child("pics/"+currentUser.getEmail()+".png");
         riversRef.putFile(imageUri)

@@ -51,7 +51,12 @@ public class HostLobbyFragment extends Fragment {
         TextView userName = container.findViewById(R.id.host_lobby_player1_id);
         ImageView userImage = container.findViewById(R.id.host_lobby_player1_profile);
         //Picasso.with(getContext()).load(image).into(userImage);
-        userImage.setImageURI(imageUri);
+        if(imageUri==null){
+            userImage.setImageResource(R.drawable.cat);
+            System.out.println("IMAGE URL NULL");
+        }else{
+            userImage.setImageURI(imageUri);
+        }
         userName.setText(name);
         System.out.println("\n\nHostLobbyFragment: username: "+name+" "+imageUri+"\n\n");
         //TODO: Need to setup Bitmap

@@ -61,6 +61,7 @@ public class ChooseGameActivity extends AppCompatActivity {
     public void createGame(View v){
         hostLobby = new HostLobbyFragment();
         hostLobby.setContainerActivity(this);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.maincontainer, hostLobby);
         transaction.commit();
@@ -93,3 +94,4 @@ public class ChooseGameActivity extends AppCompatActivity {
         mAuth.getInstance().signOut();
     }
 }
+
