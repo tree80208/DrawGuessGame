@@ -12,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Gravity;
@@ -25,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,17 +33,23 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
 
 public class MainActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     RegisterFragment frag;
+    String playername =null;
+
+    private StorageReference mStorageRef;
     Uri imageUri = null;
     private static final String TAG = "EmailPassword";
     final int RESULT_LOAD_IMG = 1;
@@ -52,11 +59,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mStorageRef = FirebaseStorage.getInstance().getReference("pics");
+        StorageReference riversRef = mStorageRef.child("images/rivers.jpg");
 
         mAuth =  FirebaseAuth.getInstance();
         //FOR TESTING PURPOSE
-//        Intent intent = new Intent(this,LeaderBoardActivity.class);
-//        startActivity(intent);
+        Intent intent = new Intent(this,LeaderBoardActivity.class);
+        startActivity(intent);
 
     }
     @Override
@@ -175,25 +184,50 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void createUserInDatabase(String name){
+        this.playername = name;
+        if(imageUri == null){
+            imageUri = Uri.parse("android.resource://com.example.drawguessgame/drawable/cat.jpg");
+        }
+        final StorageReference riversRef = mStorageRef.child("pics/"+currentUser.getEmail()+".png");
+        riversRef.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        // Get a URL to the uploaded content
+
+                        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                System.out.println("NEWESTPRINT: "+uri);
+                                updateChildren(uri);
+                            }
+                        });
+                        System.out.println("SUCCESS");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        // Handle unsuccessful uploads
+                        // ...
+                    }
+                });
+
+
+    }
+    public void updateChildren(Uri uri){
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-
         DatabaseReference databaseReference = database.getReference();
-        String path = "UserInfo/"+name;
-
+        String path = "UserInfo/"+playername;
 
         Map<String, Object> users = new HashMap<>();
-        users.put(path, new User(name, "0",""));
+        users.put(path, new User(playername, "0","",uri.toString()));
 
         databaseReference.updateChildren(users);
         System.out.println("DATABASE UPDATED");
     }
-
     public void setProfile(String name){
 
-        if(imageUri == null){
-            imageUri = Uri.parse("android.resource://com.example.drawguessgame/drawable/cat.jpg");
-        }
 
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name)

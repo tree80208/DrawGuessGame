@@ -89,8 +89,6 @@ public class LeaderBoardActivity extends AppCompatActivity {
             int index = 0;
             String name;
             int score;
-
-
             try {
 
 
@@ -110,11 +108,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
             LeaderBoardAdapter newsAdapter = new LeaderBoardAdapter(itself, R.layout.leader_board_row, profiles);
             ListView boardListView = findViewById(R.id.leader_board_list_view);
             boardListView.setAdapter(newsAdapter);
-
-
         }
-
-
     }
 
 
@@ -159,6 +153,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
             currentViewGroupUri = FileProvider.getUriForFile(
                     this,"com.example.DrawGuessGame.FileProvider",
                     imageFile);
+            System.out.println("IMAGE_URI: "+currentViewGroupUri);
         }catch(Exception e){
             e.printStackTrace();
         }

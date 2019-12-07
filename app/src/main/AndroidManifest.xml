@@ -11,6 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.DrawGuessGame.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            android:readPermission="com.company.app.FileProvider.READ">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
+
+
+
         <activity android:name=".LeaderBoardActivity"></activity>
         <activity android:name=".DrawingActivity" />
         <activity android:name=".ChooseGameActivity" />
