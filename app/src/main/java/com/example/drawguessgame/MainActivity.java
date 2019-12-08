@@ -186,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void exitButton(View view){
-//        frag.onDestroy();
         getSupportFragmentManager().popBackStack();
 
     }
