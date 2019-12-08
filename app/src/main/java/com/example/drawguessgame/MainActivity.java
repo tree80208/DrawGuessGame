@@ -93,12 +93,6 @@ public class MainActivity extends AppCompatActivity {
         (new Thread(soundRunnable)).start();
     }
 
-    @Override
-    public void onStart(){
-        super.onStart();
-        //TODO: Launch screen 2
-//        System.out.println("OnStart: "+currentUser.toString());
-    }
 
     public void buttonLogin(View v){
         String email = ((EditText)findViewById(R.id.screen1_edit_text_id)).getText().toString();
@@ -144,10 +138,12 @@ public class MainActivity extends AppCompatActivity {
     public void registerAccount(View v){
         frag = new RegisterFragment();
         frag.setContainerActivity(this);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.screen1_frame,frag,"REGISTER");
-        transaction.addToBackStack(null);
-        transaction.commit();
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.translate_right_left, R.anim.end_right_left
+                    ,R.anim.translate_left_right, R.anim.end_left_right)
+                .add(R.id.screen1_frame,frag,"REGISTER")
+                .addToBackStack(null)
+                .commit();
     }
 
     public void signUpNewAccount(View view) {
