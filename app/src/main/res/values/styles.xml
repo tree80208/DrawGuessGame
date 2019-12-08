@@ -5,10 +5,15 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/orange</item>
         <item name="windowNoTitle">true</item>
 <!--        <item name="android:fontFamily">@font/good_times_rg</item>-->
     </style>
 
+
+    <style name="WhiteTextTheme">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:backgroundTint">@color/orange</item>
+    </style>
 
 </resources>

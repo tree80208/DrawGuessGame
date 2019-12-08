@@ -9,7 +9,7 @@
     <string name="main_id">ID</string>
     <string name="main_register_text">Register new account</string>
     <string name="main_register">SIGN UP</string>
-    <string name="main_register_info">Please enter the valid email address and a password</string>
+    <string name="main_register_info">Please enter\nthe valid email address\nand a password</string>
     <string name="main_display_name">DISPLAY NAME</string>
     <!--    MAIN MENU <END>-->
 
@@ -23,8 +23,5 @@
     <string name="leader_board_title">LEADER BOARD</string>
     <string name="leader_board_share">Share with your friend!</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!--    LEADER BOARD <END>-->
 
 </resources>
