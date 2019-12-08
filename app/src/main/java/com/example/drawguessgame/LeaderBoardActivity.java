@@ -108,8 +108,6 @@ public class LeaderBoardActivity extends AppCompatActivity {
             String name;
             int score;
             try {
-
-
                 Iterator<String> iterator = json.keys();
                 while (iterator.hasNext()) {
                     String key = iterator.next();

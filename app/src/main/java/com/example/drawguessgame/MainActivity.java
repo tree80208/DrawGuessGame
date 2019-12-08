@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setUpFullScreenMode();
         setContentView(R.layout.activity_main);
         mStorageRef = FirebaseStorage.getInstance().getReference("pics");
         StorageReference riversRef = mStorageRef.child("images/rivers.jpg");
@@ -68,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
 //        startActivity(intent);
 
     }
+
+    private void setUpFullScreenMode(){
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_IMMERSIVE);
+    }
+
     @Override
     public void onResume(){
         super.onResume();
@@ -178,6 +185,11 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    public void exitButton(View view){
+//        frag.onDestroy();
+        getSupportFragmentManager().popBackStack();
+
+    }
 
     public void createUserInDatabase(String name){
         this.playername = name;
