@@ -63,6 +63,8 @@ public class ChooseGameActivity extends AppCompatActivity {
         hostLobby.setContainerActivity(this);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.translate_right_left, R.anim.end_right_left
+                ,R.anim.translate_left_right, R.anim.end_left_right);
         transaction.replace(R.id.maincontainer, hostLobby);
         transaction.commit();
 
@@ -71,6 +73,8 @@ public class ChooseGameActivity extends AppCompatActivity {
         codeFragment = new TypeCodeFragment();
         codeFragment.setContainerActivity(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.translate_right_left, R.anim.end_right_left
+                ,R.anim.translate_left_right, R.anim.end_left_right);
         transaction.replace(R.id.maincontainer, codeFragment);
         transaction.commit();
 
@@ -79,6 +83,8 @@ public class ChooseGameActivity extends AppCompatActivity {
         joinLobby = new JoinLobbyFragment();
         joinLobby.setContainerActivity(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.translate_right_left, R.anim.end_right_left
+                ,R.anim.translate_left_right, R.anim.end_left_right);
         transaction.replace(R.id.maincontainer, joinLobby);
         transaction.commit();
 
