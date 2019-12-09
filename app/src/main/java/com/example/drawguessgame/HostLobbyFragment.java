@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +28,8 @@ public class HostLobbyFragment extends Fragment {
             R.id.host_lobby_player3_id, R.id.host_lobby_player4_id};
     int[] userImageView = {R.id.host_lobby_player1_profile, R.id.host_lobby_player2_profile,
             R.id.host_lobby_player3_profile, R.id.host_lobby_player4_profile};
+    public String name = "temp";
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              final ViewGroup container,
@@ -47,7 +50,7 @@ public class HostLobbyFragment extends Fragment {
 
         Uri imageUri = user.getPhotoUrl();
         System.out.println(user.getUid());
-        String name = user.getDisplayName();
+        name = user.getDisplayName();
         TextView userName = container.findViewById(R.id.host_lobby_player1_id);
         ImageView userImage = container.findViewById(R.id.host_lobby_player1_profile);
         //Picasso.with(getContext()).load(image).into(userImage);
@@ -59,12 +62,18 @@ public class HostLobbyFragment extends Fragment {
         }
         userName.setText(name);
         System.out.println("\n\nHostLobbyFragment: username: "+name+" "+imageUri+"\n\n");
+
         //TODO: Need to setup Bitmap
 //        userName.setText(name);
 //      userImage.setImageBitmap(userBitmap);intStackTrace();
     }
+
     public void setContainerActivity(ChooseGameActivity mainActivity) {
         this.containerActivity = mainActivity;
     }
+
+//    public String getName(){
+//        return name;
+//    }
 
 }

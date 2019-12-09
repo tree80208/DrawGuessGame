@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/playerOneName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -293,22 +293,55 @@
 
             <Button
                 android:id="@+id/button_erase"
-                android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:onClick="changePaintColor"
+                android:layout_weight="1"
                 android:background="@color/colorShareButton"
-                android:textColor="@color/colorWhite"
+                android:onClick="changePaintColor"
+                android:text="@string/button_eraser"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:text="@string/button_clear"/>
+                android:textColor="@color/colorWhite" />
 
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/draw_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" />
+            android:layout_height="450dp"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/wordTimerLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:id="@+id/guessWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Attempt to draw: House"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/timerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="seconds remaining: 60"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/draw_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical" />-->
 
     </LinearLayout>
 
