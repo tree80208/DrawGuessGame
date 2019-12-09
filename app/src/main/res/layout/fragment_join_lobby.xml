@@ -123,11 +123,13 @@
             </ImageView>
         </LinearLayout>
     </LinearLayout>
+
+
 <TextView
     android:id="@+id/jointv"
     android:layout_width="140dp"
     android:layout_height="70dp"
-    android:text="Waiting for Players..."
+    android:text="@string/choose_waiting_text"
     android:textSize="25dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"

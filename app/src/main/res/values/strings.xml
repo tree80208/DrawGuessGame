@@ -17,7 +17,7 @@
     <!--    CHOOSE GAME ACTIVITY-->
     <string name="choose_create_game">CREATE GAME</string>
     <string name="choose_join_game">JOIN GAME</string>
-
+    <string name="choose_waiting_text">Waiting for Players...</string>
     <!--    CHOOSE GAME ACTIVITY <END>-->
 
 
