@@ -65,8 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth =  FirebaseAuth.getInstance();
 //        //FOR TESTING PURPOSE
-        Intent intent = new Intent(this,LeaderBoardActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this,LeaderBoardActivity.class);
+//        startActivity(intent);
 
     }
 

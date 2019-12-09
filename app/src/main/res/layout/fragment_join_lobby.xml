@@ -18,8 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_weight="1"
-        android:text="ROOM CODE"
-        android:textSize="30dp"
+        android:text="ROOM CODE:"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="40dp"
         >
     </TextView>
     <TextView
@@ -31,7 +32,6 @@
         app:layout_constraintTop_toBottomOf="@id/hostroomcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DWQ43"
         >
     </TextView>
     <LinearLayout
@@ -54,12 +54,15 @@
             android:gravity="center"
             >
             <TextView
+                android:id="@+id/join_lobby_player1_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20dp">
             </TextView>
             <ImageView
+                android:id="@+id/join_lobby_player1_profile"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:background="@color/colorPrimaryDark">
@@ -73,12 +76,16 @@
             android:layout_marginRight="20dp"
             android:gravity="center">
             <TextView
+                android:id="@+id/join_lobby_player2_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
+                android:textColor="@color/colorPrimaryDark"
+
                 android:textSize="20dp">
             </TextView>
             <ImageView
+                android:id="@+id/join_lobby_player2_profile"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:background="@color/colorPrimaryDark">
@@ -92,12 +99,16 @@
             android:layout_marginRight="20dp"
             android:gravity="center">
             <TextView
+                android:id="@+id/join_lobby_player3_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
+                android:textColor="@color/colorPrimaryDark"
+
                 android:textSize="20dp">
             </TextView>
             <ImageView
+                android:id="@+id/join_lobby_player3_profile"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:background="@color/colorPrimaryDark">
@@ -111,26 +122,29 @@
             android:layout_marginRight="20dp"
             android:gravity="center">
             <TextView
+                android:id="@+id/join_lobby_player4_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
+                android:textColor="@color/colorPrimaryDark"
+
                 android:textSize="20dp">
             </TextView>
             <ImageView
+                android:id="@+id/join_lobby_player4_profile"
                 android:layout_width="80dp"
                 android:layout_height="100dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
     </LinearLayout>
-
-
 <TextView
     android:id="@+id/jointv"
-    android:layout_width="140dp"
-    android:layout_height="70dp"
-    android:text="@string/choose_waiting_text"
-    android:textSize="25dp"
+    android:layout_width="340dp"
+    android:layout_height="90dp"
+    android:textColor="@color/colorPrimaryDark"
+    android:text="Waiting for Players..."
+    android:textSize="35dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
