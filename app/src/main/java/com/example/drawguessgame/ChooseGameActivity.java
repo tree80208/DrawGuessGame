@@ -57,6 +57,47 @@ public class ChooseGameActivity extends AppCompatActivity {
     }
 
 
+    // Set up drawFragment value in the database with parameter bol
+    public void setDatabase(boolean bol){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        String path = "UserInfo/"+currentUser.getDisplayName()+"/drawFragment";
+        if(bol){
+            databaseReference.child(path).setValue("true");
+        }else{
+            databaseReference.child(path).setValue("false");
+        }
+    }
+
+    public void setGuessingWords(){
+//        TODO:Fetch API Words here
+        DatabaseReference wordRef = database.getReference("EasyWords");
+        wordRef.setValue(apiWords);
+    }
+
+    /**
+     * fetchWords get reference to firebase and retrieves all the words under "EasyWords",
+     * and adds in to the String list "guessingWords".
+     */
+    public void fetchWords(){
+        DatabaseReference dbWords = database.getReference().child("EasyWords");
+        dbWords.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                    guessingWords.add((String) postSnapshot.getValue());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed");
+            }
+        });
+
+
+    }
+
     @Override
     public void onResume(){
         super.onResume();
@@ -95,6 +136,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         transaction.replace(R.id.maincontainer, hostLobby);
         transaction.commit();
 
+        setDatabase(true);
     }
     public void createRoom(){
         String path = "Room/"+roomName+"/Players/"+currentUser.getUid();
@@ -162,6 +204,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         transaction.commit();
         goToCodeFragment(v);
 
+        setDatabase(false);
     }
 
     public void startGameButton(View v){
