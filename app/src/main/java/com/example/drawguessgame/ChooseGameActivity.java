@@ -25,7 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.util.AbstractQueue;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChooseGameActivity extends AppCompatActivity {
@@ -39,8 +43,10 @@ public class ChooseGameActivity extends AppCompatActivity {
     TypeCodeFragment codeFragment;
     String roomName;
     HashMap<String,HashMap<String,String>> party;
-
+    List<String> apiWords = Arrays.asList("Sunglasses", "Orange", "House");
+    ArrayList<String> guessingWords = new ArrayList<>();
     SoundRunnable soundRunnable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,8 @@ public class ChooseGameActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
+        setGuessingWords();
+        fetchWords();
         createRoomName();
         playerRef = database.getReference().child("Room/"+roomName+"/Players");
         System.out.println("Oncreate ChooseGameActivity: "+currentUser.toString());
@@ -209,6 +217,7 @@ public class ChooseGameActivity extends AppCompatActivity {
 
     public void startGameButton(View v){
         Intent intent = new Intent(this,DrawingActivity.class);
+        intent.putStringArrayListExtra("guessingWords", guessingWords);
         startActivity(intent);
     }
     @Override
