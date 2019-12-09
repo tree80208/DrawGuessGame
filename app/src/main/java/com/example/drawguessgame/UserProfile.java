@@ -1,6 +1,6 @@
 package com.example.drawguessgame;
 
-public class UserProfile {
+public class UserProfile implements Comparable<UserProfile>{
     String name;
     String score;
 
@@ -15,4 +15,12 @@ public class UserProfile {
         return this.score;
     }
 
+    @Override
+    public String toString(){
+        return getName()+" ( score = "+getScore()+" )";
+    }
+    @Override
+    public int compareTo(UserProfile object){
+        return this.getScore().compareTo(object.getScore());
+    }
 }

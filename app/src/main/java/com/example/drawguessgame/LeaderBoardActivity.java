@@ -31,6 +31,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -125,10 +126,12 @@ public class LeaderBoardActivity extends AppCompatActivity {
                 System.out.println("CANNOT FETCH THE INFORMATION FROM JSON FILE");
             }
 
+            Collections.sort(profiles,Collections.<UserProfile>reverseOrder());
             LeaderBoardAdapter newsAdapter = new LeaderBoardAdapter(itself, R.layout.leader_board_row, profiles);
             ListView boardListView = findViewById(R.id.leader_board_list_view);
             boardListView.setAdapter(newsAdapter);
         }
+
     }
 
 

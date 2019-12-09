@@ -13,9 +13,10 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
 
         android:gravity="center_horizontal"
-        android:textSize="30dp"
+        android:textSize="40dp"
         />
 
     <TextView
@@ -24,9 +25,10 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
 
         android:gravity="center_horizontal"
-        android:textSize="30dp"
+        android:textSize="40dp"
         />
 
 </LinearLayout>
