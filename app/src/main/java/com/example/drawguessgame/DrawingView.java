@@ -12,7 +12,11 @@ import android.view.View;
 
 import androidx.core.content.ContextCompat;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class DrawingView extends View {
+    private final FirebaseDatabase database;
     private Path drawPath;
     private Paint drawPaint, canvasPaint;
     private static int paintColor;
@@ -24,6 +28,8 @@ public class DrawingView extends View {
     public DrawingView(Context context, AttributeSet attrs){
         super(context,attrs);
         setupDrawing();
+        database = FirebaseDatabase.getInstance();
+
         this.setBackgroundColor(getColor(R.color.colorWhite));
     }
 
@@ -31,6 +37,9 @@ public class DrawingView extends View {
     public boolean onTouchEvent(MotionEvent event){
         float touchX = event.getX();
         float touchY = event.getY();
+
+        DatabaseReference pathRef = database.getReference("TransferPaths");
+
 
         switch(event.getAction()){
             case MotionEvent.ACTION_DOWN:
@@ -41,6 +50,7 @@ public class DrawingView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 drawPath.lineTo(touchX,touchY);
+                pathRef.child("P").push().setValue(drawPath+"$$$"+drawPaint);
                 drawCanvas.drawPath(drawPath,drawPaint);
                 drawPath.reset();
                 break;

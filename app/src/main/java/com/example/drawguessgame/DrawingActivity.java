@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.ContactsContract;
 import android.util.AttributeSet;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -50,13 +52,56 @@ public class DrawingActivity extends AppCompatActivity {
         this.drawingFragment = new DrawingFragment();
         drawingFragment.setContainerActivity(this);
 
-        FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction();
-        transaction.add(R.id.draw_layout,drawingFragment);
+        updateFields();
+        timer();
 
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.draw_layout,drawingFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
+    public void timer(){
+        new CountDownTimer(90000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                TextView tv = (TextView) findViewById(R.id.timerText);
+                tv.setText(" Seconds Remaining: " + millisUntilFinished/1000);
+            }
+
+            @Override
+            public void onFinish() {
+            //TODO: DO something even timer is up.
+            }
+        }.start();
+
+
+    }
+
+    public void updateFields(){
+        //TODO:fetch and update player names, images, scores, and word
+        String username = getIntent().getStringExtra("p1");
+        TextView p1 = (TextView)findViewById(R.id.playerOneName);
+        p1.setText(username);
+
+
+
+//        String word = getIntent().getStringExtra("wordsList");
+
+        ArrayList<String> guessingwords = getIntent().getExtras().getStringArrayList("guessingWords");
+        System.out.println("guessingWords: " + guessingwords);
+        TextView guessWord = (TextView) findViewById(R.id.guessWord);
+        guessWord.setText("Draw: " + guessingwords.get(0));
+//        ArrayList<String> test = getIntent().getExtras().getStringArrayList("wordsList");
+
+//        TextView wordDisplay = (TextView) findViewById(R.id.guessWord);
+//        wordDisplay.setText(wordsList.get(0));
+//        System.out.println("words list from previous intent" + wordsList);
+
+    }
+
+
+
     public void clearDrawing(View v){
         DrawingView dv = drawingFragment.getDrawingView();
         dv.startNew();
@@ -74,10 +119,6 @@ public class DrawingActivity extends AppCompatActivity {
             dv.changePaintSize(size_arr[2]);
         }
 
-//        else if(viewID == findViewById(R.id.button_erase).getId()){
-////            dv.changePaintColor(color_arr[8]);
-////
-////        }
     }
     
 
