@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.animation.ObjectAnimator;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -23,17 +25,30 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.AbstractQueue;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class ChooseGameActivity extends AppCompatActivity {
 
+    int[] hostLobbyProfile = new int[]{R.id.host_lobby_player1_profile,R.id.host_lobby_player2_profile,
+            R.id.host_lobby_player3_profile,R.id.host_lobby_player4_profile};
+
+    int[] hostLobbyName = new int[]{R.id.host_lobby_player1_id,R.id.host_lobby_player2_id,
+            R.id.host_lobby_player3_id,R.id.host_lobby_player4_id};
     FirebaseAuth mAuth;
     FirebaseUser currentUser;
     FirebaseDatabase database;
@@ -47,18 +62,22 @@ public class ChooseGameActivity extends AppCompatActivity {
     ArrayList<String> guessingWords = new ArrayList<>();
     SoundRunnable soundRunnable;
 
+    ChooseGameActivity itself;
+
+    JSONObject jsonObject;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        itself = this;
         party = new HashMap<String,HashMap<String,String>>();
         setContentView(R.layout.activity_choose_game);
         mAuth =  FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
-        setGuessingWords();
-        fetchWords();
-        createRoomName();
+//        setGuessingWords();
+//        fetchWords();
         playerRef = database.getReference().child("Room/"+roomName+"/Players");
         System.out.println("Oncreate ChooseGameActivity: "+currentUser.toString());
 
@@ -76,6 +95,7 @@ public class ChooseGameActivity extends AppCompatActivity {
             databaseReference.child(path).setValue("false");
         }
     }
+
 
     public void setGuessingWords(){
 //        TODO:Fetch API Words here
@@ -102,9 +122,8 @@ public class ChooseGameActivity extends AppCompatActivity {
                 System.out.println("The read failed");
             }
         });
-
-
     }
+
 
     @Override
     public void onResume(){
@@ -134,7 +153,7 @@ public class ChooseGameActivity extends AppCompatActivity {
 
 
     public void createGame(View v){
-
+        createRoomName();
         hostLobby = new HostLobbyFragment();
         hostLobby.setContainerActivity(this);
         createRoom();
@@ -144,17 +163,30 @@ public class ChooseGameActivity extends AppCompatActivity {
         transaction.replace(R.id.maincontainer, hostLobby);
         transaction.commit();
 
+
         setDatabase(true);
     }
     public void createRoom(){
-        String path = "Room/"+roomName+"/Players/"+currentUser.getUid();
+        myRef.child("Room/"+this.roomName).removeValue();
+
+        String turnpath = "Room/"+this.roomName;
+        Map<String, Object> turn = new HashMap<String, Object>();
+        turn.put(turnpath,new Turn());
+        myRef.updateChildren(turn);
+
+
+        String playerpath = "Room/"+this.roomName+"/Player/"+currentUser.getDisplayName();
         Map<String, Object> users = new HashMap<>();
-        users.put(path,currentUser);
+        users.put(playerpath, new UserProfile(currentUser.getDisplayName(),"0"));
         myRef.updateChildren(users);
+
+        playerRef = myRef.child("Room/"+this.roomName+"/Player");
+
         playerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 System.out.println("SomethingChanged");
+                new FetchRoomJSONTask().execute();
                 updateHostRoomUI();
             }
 
@@ -165,15 +197,24 @@ public class ChooseGameActivity extends AppCompatActivity {
         });
 
     }
+
+
     public void createRoomName(){
-        this.roomName = "ABetterRoomName";
+        List<String> list = Arrays.asList("HJLW32","PIPF42","GLID54");
+        Collections.shuffle(list);
+        this.roomName = list.get(0);
     }
+    public String getRoomName(){
+        return this.roomName;
+    }
+
+
     public void goToCodeFragment(View v){
         codeFragment = new TypeCodeFragment();
         codeFragment.setContainerActivity(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.translate_right_left, R.anim.end_right_left
-                ,R.anim.translate_left_right, R.anim.end_left_right);
+                    ,R.anim.translate_left_right, R.anim.end_left_right);
         transaction.add(R.id.maincontainer, codeFragment);
         transaction.commit();
 
@@ -198,30 +239,126 @@ public class ChooseGameActivity extends AppCompatActivity {
             i++;
         }
     }
-    public void updateHostRoomUI(){
-        System.out.print("Updating Host room");
-
-    }
     public void joinGame(View v){
+        if(myRef.child("Room/"+this.roomName+"/").equals("https://drawguessgame-19fe2.firebaseio.com/Room/null")){
+            System.out.println("Room Does not exits");
+            return;
+        }
+
         joinLobby = new JoinLobbyFragment();
         joinLobby.setContainerActivity(this);
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.maincontainer, joinLobby);
         transaction.setCustomAnimations(R.anim.translate_right_left, R.anim.end_right_left
                 ,R.anim.translate_left_right, R.anim.end_left_right);
-        transaction.replace(R.id.maincontainer, joinLobby);
         transaction.commit();
-        goToCodeFragment(v);
+//        goToCodeFragment(v);
+        joinRoom();
 
         setDatabase(false);
     }
 
+    public void joinRoom(){
+        System.out.println("Joining");
+
+        EditText code = findViewById(R.id.codeet);
+        roomName = code.getText().toString();
+        String path = "Room/"+roomName+"/Player/"+currentUser.getDisplayName();
+        Map<String, Object> users = new HashMap<>();
+        users.put(path, new UserProfile(currentUser.getDisplayName(),"0"));
+        myRef.updateChildren(users);
+    }
+
     public void startGameButton(View v){
+
+//
+        myRef.child("Room").child(roomName).child("start").setValue(true);
+
         Intent intent = new Intent(this,DrawingActivity.class);
         intent.putStringArrayListExtra("guessingWords", guessingWords);
         startActivity(intent);
     }
+
+    public void updateHostRoomUI(){
+        System.out.print("Updating Host room");
+
+        new FetchRoomJSONTask().execute();
+
+        try {
+            JSONObject json = jsonObject.getJSONObject("Room").getJSONObject(roomName).getJSONObject("Player");
+            Iterator<String> iterator = json.keys();
+            int c = 0;
+            while (iterator.hasNext()) {
+                String key = iterator.next();
+                JSONObject curr = json.getJSONObject(key);
+                String name = curr.getString("name");
+
+                JSONObject profile = jsonObject.getJSONObject("UserInfo").getJSONObject(name);
+
+                Uri imageuri = Uri.parse(profile.getString("uri"));
+
+                TextView tv = findViewById(hostLobbyName[c]);
+                ImageView iv = findViewById(hostLobbyProfile[c]);
+                tv.setText(name);
+                iv.setImageURI(imageuri);
+
+                c++;
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private class FetchRoomJSONTask extends AsyncTask<Object, Void, JSONObject> {
+        @Override
+        protected JSONObject doInBackground(Object... objects) {
+
+            try {
+                URL url = new URL("https://drawguessgame-19fe2.firebaseio.com/Room/"+roomName+".json");
+                String line;
+                String json = "";
+                BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+                while((line = in.readLine()) != null){
+                    System.out.println("JSON LINE"+line);
+                    json += line;
+                }
+                in.close();
+
+                JSONObject jsonObject = new JSONObject(json);
+                System.out.println("======================"+jsonObject);
+                return jsonObject;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(JSONObject json){
+//                setStartBoolean(json.getBoolean("start"));
+//                System.out.println(json.getBoolean("start"));
+            itself.jsonObject = json;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     @Override
     public void onDestroy(){
+        myRef.child("Room/"+this.roomName).removeValue();
         super.onDestroy();
         mAuth.getInstance().signOut();
     }
@@ -263,13 +400,6 @@ public class ChooseGameActivity extends AppCompatActivity {
         transaction.remove(codeFragment);
         transaction.commit();
     }
-    public void joinRoom(){
-        System.out.println("Joining");
-        String path = "Room/"+roomName+"/Players/"+currentUser.getUid();
-        Map<String, Object> users = new HashMap<>();
-        users.put(path,currentUser);
-        System.out.println(path);
-        myRef.updateChildren(users);
-    }
+
 }
 

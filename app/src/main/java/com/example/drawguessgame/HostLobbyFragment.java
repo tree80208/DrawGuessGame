@@ -34,16 +34,25 @@ public class HostLobbyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              final ViewGroup container,
                              Bundle savedInstanceState){
+        if(container == null){
+            return null;
+        }
         containerView = inflater.inflate(R.layout.fragment_host_lobby, container, false);
         mAuth =  FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         //TODO:
 
-        System.out.println(ref.child("UserInfo"));
+
+        TextView roomCode = (TextView) containerView.findViewById(R.id.hostid);
+        roomCode.setText(containerActivity.getRoomName());
+
+
         setUserInfo(containerView,currentUser, 1);
 
         return containerView;
     }
+
+
 
     public void setUserInfo(View container, FirebaseUser user, int playerNumber) {
         String realPath;
