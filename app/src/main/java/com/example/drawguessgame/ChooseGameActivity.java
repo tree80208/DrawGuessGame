@@ -54,6 +54,19 @@ public class ChooseGameActivity extends AppCompatActivity {
 
     }
 
+
+    // Set up drawFragment value in the database with parameter bol
+    public void setDatabase(boolean bol){
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
+        String path = "UserInfo/"+currentUser.getDisplayName()+"/drawFragment";
+        if(bol){
+            databaseReference.child(path).setValue("true");
+        }else{
+            databaseReference.child(path).setValue("false");
+        }
+    }
+
     public void setGuessingWords(){
 //        TODO:Fetch API Words here
         DatabaseReference wordRef = database.getReference("EasyWords");
@@ -121,6 +134,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         transaction.replace(R.id.maincontainer, hostLobby);
         transaction.commit();
 
+        setDatabase(true);
     }
     public void goToCodeFragment(View v){
         codeFragment = new TypeCodeFragment();
@@ -141,6 +155,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         transaction.replace(R.id.maincontainer, joinLobby);
         transaction.commit();
 
+        setDatabase(false);
     }
 
     public void startGameButton(View v){
