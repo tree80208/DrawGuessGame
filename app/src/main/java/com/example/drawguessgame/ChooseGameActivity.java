@@ -40,6 +40,7 @@ public class ChooseGameActivity extends AppCompatActivity {
     ArrayList<String> guessingWords = new ArrayList<>();
     private FirebaseDatabase database;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
