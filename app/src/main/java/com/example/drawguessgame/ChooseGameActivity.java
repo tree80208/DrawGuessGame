@@ -153,7 +153,7 @@ public class ChooseGameActivity extends AppCompatActivity {
             intent.putExtra("p2", "sessionId");
             intent.putExtra("p3", "sessionId");
             intent.putExtra("p4", "sessionId");
-            intent.putStringArrayListExtra("wordsList", guessingWords);
+            intent.putStringArrayListExtra("guessingWords", guessingWords);
 
             startActivity(intent);
         }else{

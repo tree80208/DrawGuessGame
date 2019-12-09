@@ -84,8 +84,19 @@ public class DrawingActivity extends AppCompatActivity {
         TextView p1 = (TextView)findViewById(R.id.playerOneName);
         p1.setText(username);
 
-        ArrayList<String> test = getIntent().getExtras().getStringArrayList("wordsList");
-        System.out.println("words list from previous intent" + test);
+
+
+//        String word = getIntent().getStringExtra("wordsList");
+
+        ArrayList<String> guessingwords = getIntent().getExtras().getStringArrayList("guessingWords");
+        System.out.println("guessingWords: " + guessingwords);
+        TextView guessWord = (TextView) findViewById(R.id.guessWord);
+        guessWord.setText("Draw: " + guessingwords.get(0));
+//        ArrayList<String> test = getIntent().getExtras().getStringArrayList("wordsList");
+
+//        TextView wordDisplay = (TextView) findViewById(R.id.guessWord);
+//        wordDisplay.setText(wordsList.get(0));
+//        System.out.println("words list from previous intent" + wordsList);
 
     }
 

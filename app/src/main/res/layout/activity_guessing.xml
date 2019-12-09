@@ -190,163 +190,163 @@
         </LinearLayout>
 
         <!--        <LinearLayout-->
-<!--            android:id="@+id/colorsLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="4">-->
+        <!--            android:id="@+id/colorsLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:weightSum="4">-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_red"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_red"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0"-->
 
-<!--                android:background="@color/colorRed"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/colorRed"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_green"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_green"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0"-->
 
-<!--                android:background="@color/colorGreen"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/colorGreen"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_blue"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_blue"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0"-->
 
-<!--                android:background="@color/colorBlue"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/colorBlue"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_purple"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_purple"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0"-->
 
-<!--                android:background="@color/colorPurple"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/colorPurple"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_aqua"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_aqua"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0"-->
 
-<!--                android:background="@color/aqua"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/aqua"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_pink"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_pink"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0"-->
 
-<!--                android:background="@color/pink"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/pink"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_grey"-->
-<!--                android:layout_width="60dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_grey"-->
+        <!--                android:layout_width="60dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
 
-<!--                android:background="@color/grey"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/grey"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_orange"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="0"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_orange"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="0"-->
 
-<!--                android:background="@color/orange"-->
-<!--                android:onClick="changePaintColor" />-->
+        <!--                android:background="@color/orange"-->
+        <!--                android:onClick="changePaintColor" />-->
 
-<!--        </LinearLayout>-->
+        <!--        </LinearLayout>-->
 
-<!--        <LinearLayout-->
-<!--            android:id="@+id/sizeButtons"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="5">-->
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/sizeButtons"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="60dp"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:weightSum="5">-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_small"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_small"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
 
-<!--                android:background="@color/colorSmallButton"-->
+        <!--                android:background="@color/colorSmallButton"-->
 
-<!--                android:onClick="changeBrushSize"-->
-<!--                android:text="@string/button_small"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+        <!--                android:onClick="changeBrushSize"-->
+        <!--                android:text="@string/button_small"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_medium"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_medium"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
 
-<!--                android:background="@color/colorMediumButton"-->
+        <!--                android:background="@color/colorMediumButton"-->
 
-<!--                android:onClick="changeBrushSize"-->
-<!--                android:text="@string/button_medium"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+        <!--                android:onClick="changeBrushSize"-->
+        <!--                android:text="@string/button_medium"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_large"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_large"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
 
-<!--                android:background="@color/colorLargeButton"-->
+        <!--                android:background="@color/colorLargeButton"-->
 
-<!--                android:onClick="changeBrushSize"-->
-<!--                android:text="@string/button_large"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+        <!--                android:onClick="changeBrushSize"-->
+        <!--                android:text="@string/button_large"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_clear"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_clear"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
 
-<!--                android:background="@color/colorClearButton"-->
+        <!--                android:background="@color/colorClearButton"-->
 
-<!--                android:onClick="clearDrawing"-->
-<!--                android:text="clear"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-<!--                android:textColor="@color/colorWhite" />-->
+        <!--                android:onClick="clearDrawing"-->
+        <!--                android:text="clear"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+        <!--                android:textColor="@color/colorWhite" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/button_erase"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
-<!--                android:background="@color/colorShareButton"-->
-<!--                android:onClick="changePaintColor"-->
-<!--                android:text="@string/button_eraser"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
-<!--                android:textColor="@color/colorWhite" />-->
+        <!--            <Button-->
+        <!--                android:id="@+id/button_erase"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:background="@color/colorShareButton"-->
+        <!--                android:onClick="changePaintColor"-->
+        <!--                android:text="@string/button_eraser"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large"-->
+        <!--                android:textColor="@color/colorWhite" />-->
 
-<!--            <Button-->
-<!--                android:id="@+id/share"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_weight="1"-->
-<!--                android:onClick="onClickShare"-->
-<!--                android:text="@string/button_share"-->
-<!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
+        <!--            <Button-->
+        <!--                android:id="@+id/share"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="match_parent"-->
+        <!--                android:layout_weight="1"-->
+        <!--                android:onClick="onClickShare"-->
+        <!--                android:text="@string/button_share"-->
+        <!--                android:textAppearance="@style/TextAppearance.AppCompat.Large" />-->
 
-<!--        </LinearLayout>-->
+        <!--        </LinearLayout>-->
 
 
         <!--        <LinearLayout-->
