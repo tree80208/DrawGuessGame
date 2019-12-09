@@ -107,6 +107,9 @@ public class LeaderBoardActivity extends AppCompatActivity {
         protected void onPostExecute(JSONObject json){
             profiles = new ArrayList<>();
 //            profiles.add(new UserProfile("User Name", "Score"));
+            String username = getIntent().getExtras().getString("username");
+//            System.out.println("$$$ this is host user"+username);
+
 
             int index = 0;
             String name;
@@ -118,6 +121,12 @@ public class LeaderBoardActivity extends AppCompatActivity {
                     JSONObject curr = json.getJSONObject(key);
                     name = curr.getString("name");
                     score = curr.getInt("score");
+//                    TODO: if name in list that was passed in through intent, filtered to only get scores of the people in lobby
+
+                    System.out.println("in json = " + name);
+//                    if(name == username){
+//                        profiles.add(new UserProfile(name, Integer.toString(score)));
+//                    }
                     profiles.add(new UserProfile(name, Integer.toString(score)));
                 }
 

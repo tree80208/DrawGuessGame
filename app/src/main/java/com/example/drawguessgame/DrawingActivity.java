@@ -57,10 +57,12 @@ public class DrawingActivity extends AppCompatActivity {
         transaction.add(R.id.draw_layout,drawingFragment);
         transaction.addToBackStack(null);
         transaction.commit();
+
+        
     }
 
     public void timer(){
-        new CountDownTimer(30000, 1000) {
+        new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 TextView tv = (TextView) findViewById(R.id.timerText);
@@ -75,6 +77,14 @@ public class DrawingActivity extends AppCompatActivity {
         }.start();
 
 
+    }
+
+    public void endGame(View v){
+        System.out.println("end game button clicked method");
+        String username = getIntent().getStringExtra("p1");
+        Intent leader = new Intent(this, LeaderBoardActivity.class);
+        leader.putExtra("username", username);
+        startActivity(leader);
     }
 
 
