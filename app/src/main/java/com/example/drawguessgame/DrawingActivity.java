@@ -51,10 +51,8 @@ public class DrawingActivity extends AppCompatActivity {
 
         this.drawingFragment = new DrawingFragment();
         drawingFragment.setContainerActivity(this);
-
         updateFields();
         timer();
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.draw_layout,drawingFragment);
         transaction.addToBackStack(null);
