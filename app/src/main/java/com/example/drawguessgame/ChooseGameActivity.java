@@ -66,6 +66,7 @@ public class ChooseGameActivity extends AppCompatActivity {
 
     JSONObject jsonObject;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,10 +77,13 @@ public class ChooseGameActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference();
-//        setGuessingWords();
-//        fetchWords();
+        setGuessingWords();
+        fetchWords();
         playerRef = database.getReference().child("Room/"+roomName+"/Players");
         System.out.println("Oncreate ChooseGameActivity: "+currentUser.toString());
+
+
+        new FetchRoomJSONTask().execute();
 
     }
 
@@ -268,6 +272,40 @@ public class ChooseGameActivity extends AppCompatActivity {
         Map<String, Object> users = new HashMap<>();
         users.put(path, new UserProfile(currentUser.getDisplayName(),"0"));
         myRef.updateChildren(users);
+
+
+        myRef.child("Room").child(roomName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                System.out.println("SomethingChanged");
+                new FetchRoomJSONTask().execute();
+                updateJoinRoomUI();
+
+                try {
+                    if(!roomName.trim().equals("")){
+
+                        if(jsonObject.getJSONObject("Room").getJSONObject(roomName).getBoolean("start")){
+                            Intent intent = new Intent(itself,DrawingActivity.class);
+                            intent.putStringArrayListExtra("guessingWords", guessingWords);
+                            startActivity(intent);
+                        }
+                    }
+
+                } catch (JSONException e) {
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
+
+
     }
 
     public void startGameButton(View v){
@@ -319,18 +357,18 @@ public class ChooseGameActivity extends AppCompatActivity {
         protected JSONObject doInBackground(Object... objects) {
 
             try {
-                URL url = new URL("https://drawguessgame-19fe2.firebaseio.com/Room/"+roomName+".json");
+                URL url = new URL("https://drawguessgame-19fe2.firebaseio.com/.json");
                 String line;
                 String json = "";
                 BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
                 while((line = in.readLine()) != null){
-                    System.out.println("JSON LINE"+line);
+//                    System.out.println("JSON LINE"+line);
                     json += line;
                 }
                 in.close();
 
                 JSONObject jsonObject = new JSONObject(json);
-                System.out.println("======================"+jsonObject);
+                System.out.println("======================");
                 return jsonObject;
 
             } catch (Exception e) {
