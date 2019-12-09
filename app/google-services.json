@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:322629283803:android:79c070b67ed5ad061041fe",
+        "android_client_info": {
+          "package_name": "com.benjdd.videogamecharacters"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322629283803-hjn9g3a2haqfakd3cqnhs1t3o9mbja01.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.benjdd.videogamecharacters",
+            "certificate_hash": "1aef2af3b9917956f5ba0c7a75cc68509c9c6a68"
+          }
+        },
+        {
+          "client_id": "322629283803-4s3tb2rt0fuj59hcpcb1b7ku6g0c65e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGf8FXIaOoIt8N3JdXCQgwmq6IQIvuC4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322629283803-4s3tb2rt0fuj59hcpcb1b7ku6g0c65e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:322629283803:android:3858eb7e348289e11041fe",
         "android_client_info": {
           "package_name": "com.example.drawguessgame"
@@ -15,11 +52,64 @@
       },
       "oauth_client": [
         {
+          "client_id": "322629283803-5pnt64cdgr2pun5uibujm87duurimvju.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drawguessgame",
+            "certificate_hash": "1aef2af3b9917956f5ba0c7a75cc68509c9c6a68"
+          }
+        },
+        {
+          "client_id": "322629283803-8db7sj2g1utruqnuomnl5rngd7etamr5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.drawguessgame",
+            "certificate_hash": "92dd980b6e0c83cfef95da7c59a70620b06f1e77"
+          }
+        },
+        {
           "client_id": "322629283803-2906rf0b441921m6jbbr87ntesq8l3kl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.drawguessgame",
             "certificate_hash": "3da5f5d3c53d3cf4ae48b47fea1799ec2aa17c71"
+          }
+        },
+        {
+          "client_id": "322629283803-4s3tb2rt0fuj59hcpcb1b7ku6g0c65e2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGf8FXIaOoIt8N3JdXCQgwmq6IQIvuC4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "322629283803-4s3tb2rt0fuj59hcpcb1b7ku6g0c65e2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:322629283803:android:746498f5fade6b5c1041fe",
+        "android_client_info": {
+          "package_name": "com.example.sketcher"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "322629283803-jpd9k0blsddebrj92s8uvu7bdb0vkmst.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sketcher",
+            "certificate_hash": "65de82690508b867ccf27d94a3953a90119d548d"
           }
         },
         {
