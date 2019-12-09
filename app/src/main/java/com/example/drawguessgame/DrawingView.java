@@ -38,7 +38,7 @@ public class DrawingView extends View {
         float touchX = event.getX();
         float touchY = event.getY();
 
-        DatabaseReference pathRef = database.getReference("TransferPaths");
+//        DatabaseReference pathRef = database.getReference("TransferPaths");
 
 
         switch(event.getAction()){
@@ -50,7 +50,7 @@ public class DrawingView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 drawPath.lineTo(touchX,touchY);
-                pathRef.child("P").push().setValue(drawPath+"$$$"+drawPaint);
+//                pathRef.child("P").push().setValue(drawPath+"$$$"+drawPaint);
                 drawCanvas.drawPath(drawPath,drawPaint);
                 drawPath.reset();
                 break;
