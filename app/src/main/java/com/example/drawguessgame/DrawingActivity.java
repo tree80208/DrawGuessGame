@@ -62,7 +62,7 @@ public class DrawingActivity extends AppCompatActivity {
     }
 
     public void timer(){
-        new CountDownTimer(90000, 1000) {
+        new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 TextView tv = (TextView) findViewById(R.id.timerText);
@@ -72,11 +72,14 @@ public class DrawingActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
             //TODO: DO something even timer is up.
+//                finish();
             }
         }.start();
 
 
     }
+
+
 
     public void updateFields(){
         //TODO:fetch and update player names, images, scores, and word
