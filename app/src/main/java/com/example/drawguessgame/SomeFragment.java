@@ -1,16 +1,10 @@
 package com.example.drawguessgame;
 
-
 import android.app.Activity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
-
-import androidx.fragment.app.Fragment;
-
-import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,16 +18,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class GuessingFragment extends Fragment {
+import java.util.HashSet;
+
+
+public class SomeFragment extends Fragment {
+
     public Activity containerActivity = null;
     private View inflatedView = null;
-    private String webTitle = "";
-    private String contentText = "";
-    private String contentString;
+//    private final DatabaseReference pathRef;
+    private Path drawPath;
+    private Paint drawPaint, canvasPaint;
+    private static int paintColor;
+    private static float paintSize;
+    private Canvas drawCanvas;
+    private Bitmap canvasBitmap;
     private FirebaseDatabase database;
+    private DatabaseReference pathRef;
+    private HashSet<String> dbValues;
 
-
-    public GuessingFragment() { }
+    public SomeFragment() { }
 
     public void setContainerActivity(Activity containerActivity) {
         this.containerActivity = containerActivity;
@@ -44,19 +47,14 @@ public class GuessingFragment extends Fragment {
                              ViewGroup container,
                              Bundle savedInstanceState) {
 
-        fetch();
         inflatedView = inflater.inflate(R.layout.fragment_guess, container, false);
 
-//        webTitle = getArguments().getString("title");
-//        String webViewLink = getArguments().getString("webViewLink");
-//        contentString = getArguments().getString("content");
-//
-//
-//        TextView title = inflatedView.findViewById(R.id.title_text);
-//        title.setText(webTitle);
-//
-//        TextView contentTv = inflatedView.findViewById(R.id.content);
-//        contentTv.setText(contentString);
+
+        database = FirebaseDatabase.getInstance();
+//        pathRef = database.getReference("paths");
+        fetch();
+        System.out.println("check paths");
+        System.out.println(dbValues);
 
         return inflatedView;
     }
@@ -67,8 +65,7 @@ public class GuessingFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-//                    dbValues.add((String) postSnapshot.getValue());
-                    System.out.println("post get child"+postSnapshot.getChildren());
+                    dbValues.add((String) postSnapshot.getValue());
                 }
             }
 
@@ -77,6 +74,10 @@ public class GuessingFragment extends Fragment {
                 System.out.println("The read failed");
             }
         });
+
     }
+
+
+
 
 }

@@ -312,8 +312,8 @@ public class ChooseGameActivity extends AppCompatActivity {
 
 //
         myRef.child("Room").child(roomName).child("start").setValue(true);
-
         Intent intent = new Intent(this,DrawingActivity.class);
+        intent.putExtra("p1Name", hostLobbyName);
         intent.putStringArrayListExtra("guessingWords", guessingWords);
         startActivity(intent);
     }

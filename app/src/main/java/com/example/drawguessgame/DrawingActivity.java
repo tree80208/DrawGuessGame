@@ -78,25 +78,29 @@ public class DrawingActivity extends AppCompatActivity {
 
     }
 
+    public void switchFrag(View v){
+//        Intent intent = new Intent(this, GuesserActivity.class);
+//        startActivity(intent);
+    }
+
+
+    public void endGame(View v){
+        Intent intent = new Intent(this, LeaderBoardActivity.class);
+        startActivity(intent);
+    }
+
+
     public void updateFields(){
         //TODO:fetch and update player names, images, scores, and word
-        String username = getIntent().getStringExtra("p1");
+        String username = getIntent().getStringExtra("p1Name");
         TextView p1 = (TextView)findViewById(R.id.playerOneName);
         p1.setText(username);
 
-
-
-//        String word = getIntent().getStringExtra("wordsList");
 
         ArrayList<String> guessingwords = getIntent().getExtras().getStringArrayList("guessingWords");
         System.out.println("guessingWords: " + guessingwords);
         TextView guessWord = (TextView) findViewById(R.id.guessWord);
         guessWord.setText("Draw: " + guessingwords.get(0));
-//        ArrayList<String> test = getIntent().getExtras().getStringArrayList("wordsList");
-
-//        TextView wordDisplay = (TextView) findViewById(R.id.guessWord);
-//        wordDisplay.setText(wordsList.get(0));
-//        System.out.println("words list from previous intent" + wordsList);
 
     }
 

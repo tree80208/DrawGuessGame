@@ -39,8 +39,6 @@ public class GuesserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guessing);
 
-
-
         this.guessingFragment = new GuessingFragment();
         guessingFragment.setContainerActivity(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

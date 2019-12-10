@@ -131,21 +131,21 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 1000" />
+                android:text="Score: 0" />
 
             <TextView
                 android:id="@+id/scoretwo"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 999" />
+                android:text="Score: 0" />
 
             <TextView
                 android:id="@+id/scorethree"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 992" />
+                android:text="Score: 0" />
 
             <TextView
                 android:id="@+id/scorefour"
@@ -299,6 +299,28 @@
                 android:background="@color/colorShareButton"
                 android:onClick="changePaintColor"
                 android:text="@string/button_eraser"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/button_switch"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorShareButton"
+                android:onClick="switchFrag"
+                android:text="@string/button_switch"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/button_end"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/colorShareButton"
+                android:onClick="endGame"
+                android:text="@string/button_end"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/colorWhite" />
 
