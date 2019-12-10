@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class DrawingView extends View {
     private final FirebaseDatabase database;
+    private final DatabaseReference pathRef;
     private Path drawPath;
     private Paint drawPaint, canvasPaint;
     private static int paintColor;
@@ -29,6 +30,8 @@ public class DrawingView extends View {
         super(context,attrs);
         setupDrawing();
         database = FirebaseDatabase.getInstance();
+        pathRef = database.getReference("DrawPaths");
+
 
         this.setBackgroundColor(getColor(R.color.colorWhite));
     }
@@ -38,7 +41,7 @@ public class DrawingView extends View {
         float touchX = event.getX();
         float touchY = event.getY();
 
-        DatabaseReference pathRef = database.getReference("TransferPaths");
+//        DatabaseReference pathRef = database.getReference("TransferPaths");
 
 
         switch(event.getAction()){
@@ -50,7 +53,8 @@ public class DrawingView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 drawPath.lineTo(touchX,touchY);
-                pathRef.child("P").push().setValue(drawPath+"$$$"+drawPaint);
+//                pathRef.push().child("cordsColor").setValue(touchX+"$$$"+touchY+"$$$"+paintSize+"$$$"+paintColor);
+                pathRef.push().setValue(touchX+"$$$"+touchY+"$$$"+paintSize+"$$$"+paintColor);
                 drawCanvas.drawPath(drawPath,drawPaint);
                 drawPath.reset();
                 break;
