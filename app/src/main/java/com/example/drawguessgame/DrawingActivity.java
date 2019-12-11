@@ -29,8 +29,12 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -48,22 +52,50 @@ public class DrawingActivity extends AppCompatActivity {
             R.color.colorPurple, R.color.aqua, R.color.pink, R.color.grey, R.color.orange,
             R.color.colorWhite};
     float[] size_arr = {15,30,60};
+    private Object currentHost;
+    private Object currentUser;
+    private FirebaseAuth mAuth;
+    private String currentUserID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawing);
 
-        this.drawingFragment = new DrawingFragment();
-        drawingFragment.setContainerActivity(this);
+        mAuth =  FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
+        database = FirebaseDatabase.getInstance();
+        currentUserID = mAuth.getUid();
+        
+        System.out.println("mauth id= " + mAuth.getUid());
+        System.out.println("host = " + currentHost);
+//
+        String testHost = getIntent().getStringExtra("Host");
+        String playertwo = getIntent().getStringExtra("playerTwoID");
+//
+        System.out.println("testhost id= " + testHost);
+        System.out.println("playertwo test = " + playertwo);
 
-        updateFields();
-        timer();
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.draw_layout, drawingFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        if(currentUserID.equals(testHost) && !playertwo.equals(testHost)){
+            this.drawingFragment = new DrawingFragment();
+            drawingFragment.setContainerActivity(this);
+//            updateFields();
+//            timer();
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.draw_layout, drawingFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        }
+//        fetchDrawingLines();
+//        this.drawingFragment = new DrawingFragment();
+//        drawingFragment.setContainerActivity(this);
+//        updateFields();
+//        timer();
+//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//        transaction.add(R.id.draw_layout, drawingFragment);
+//        transaction.addToBackStack(null);
+//        transaction.commit();
     }
 
     public void timer(){
@@ -254,6 +286,25 @@ public class DrawingActivity extends AppCompatActivity {
         File image = File.createTempFile(imageFileName,".jpg",storageDir);
 
         return image;
+    }
+
+    public void fetchDrawingLines(){
+        DatabaseReference dbWords = database.getReference().child("Host");
+        dbWords.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                //TODO: info is a temp variable....
+                Object info = snapshot.getValue();
+                currentHost = snapshot.getValue();
+                System.out.println("HOST NAME%%%%%%%%"+info);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed");
+            }
+        });
+
     }
 
 }

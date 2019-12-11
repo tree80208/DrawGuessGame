@@ -65,6 +65,7 @@ public class ChooseGameActivity extends AppCompatActivity {
     ChooseGameActivity itself;
 
     JSONObject jsonObject;
+    private String currHost;
 
 
     @Override
@@ -224,6 +225,7 @@ public class ChooseGameActivity extends AppCompatActivity {
 
     }
     public void updateJoinRoomUI(){
+        //TODO: update names here
         System.out.print("Updating Join room");
         TextView player1name = findViewById(R.id.join_lobby_player1_id);
         ImageView player1profile = findViewById(R.id.join_lobby_player1_profile);
@@ -262,7 +264,7 @@ public class ChooseGameActivity extends AppCompatActivity {
 
         setDatabase(false);
     }
-
+//TODO: fix that it doesnt just auto join
     public void joinRoom(){
         System.out.println("Joining");
 
@@ -287,6 +289,7 @@ public class ChooseGameActivity extends AppCompatActivity {
                         if(jsonObject.getJSONObject("Room").getJSONObject(roomName).getBoolean("start")){
                             Intent intent = new Intent(itself,DrawingActivity.class);
                             intent.putStringArrayListExtra("guessingWords", guessingWords);
+                            intent.putExtra("playerTwoID", currentUser.getUid());
                             startActivity(intent);
                         }
                     }
@@ -310,11 +313,15 @@ public class ChooseGameActivity extends AppCompatActivity {
 
     public void startGameButton(View v){
         myRef.child("Room").child(roomName).child("start").setValue(true);
-        myRef.child("Turn").setValue("host");
+        System.out.println("start button ===== id"+currentUser.getUid());
+        myRef.child("Host").setValue(currentUser.getUid());
         myRef.child("guessWord").setValue(guessingWords.get(0));
+        currHost = currentUser.getUid();
 
         Intent intent = new Intent(this, DrawingActivity.class);
         intent.putStringArrayListExtra("guessingWords", guessingWords);
+        intent.putExtra("currHost", currentUser.getUid());
+
         startActivity(intent);
     }
 
