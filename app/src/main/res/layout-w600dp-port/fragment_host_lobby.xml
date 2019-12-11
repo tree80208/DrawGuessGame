@@ -5,19 +5,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/hostlobby"
     android:background="@color/colorWhite"
-    android:clickable="true"
-    tools:context=".ChooseGameActivity">
+    tools:context=".ChooseGameActivity"
+    android:clickable="true">
 
     <TextView
         android:id="@+id/hostroomcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:layout_weight="1"
-        android:text="ROOM CODE:"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="40dp"
+        android:text="ROOM CODE"
+        android:textSize="80dp"
         app:layout_constraintBottom_toTopOf="@id/hostid"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -27,16 +27,16 @@
 
     <TextView
         android:id="@+id/hostid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:textSize="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/hostroomcode"></TextView>
+        android:layout_marginTop="20dp"
+        android:textSize="40dp"
+        app:layout_constraintTop_toBottomOf="@id/hostroomcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DWQ43"
+        >
+    </TextView>
 
     <LinearLayout
         app:layout_constraintLeft_toLeftOf="parent"
@@ -58,17 +58,16 @@
             android:gravity="center"
             >
             <TextView
-                android:id="@+id/join_lobby_player1_id"
+                android:id="@+id/host_lobby_player1_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20dp">
+                android:textSize="35dp">
             </TextView>
             <ImageView
-                android:id="@+id/join_lobby_player1_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:id="@+id/host_lobby_player1_profile"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
@@ -80,18 +79,16 @@
             android:layout_marginRight="20dp"
             android:gravity="center">
             <TextView
-                android:id="@+id/join_lobby_player2_id"
+                android:id="@+id/host_lobby_player2_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
-                android:textColor="@color/colorPrimaryDark"
-
-                android:textSize="20dp">
+                android:textSize="35dp">
             </TextView>
             <ImageView
-                android:id="@+id/join_lobby_player2_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:id="@+id/host_lobby_player2_profile"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
@@ -103,18 +100,16 @@
             android:layout_marginRight="20dp"
             android:gravity="center">
             <TextView
-                android:id="@+id/join_lobby_player3_id"
+                android:id="@+id/host_lobby_player3_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
-                android:textColor="@color/colorPrimaryDark"
-
-                android:textSize="20dp">
+                android:textSize="35dp">
             </TextView>
             <ImageView
-                android:id="@+id/join_lobby_player3_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:id="@+id/host_lobby_player3_profile"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
@@ -126,34 +121,40 @@
             android:layout_marginRight="20dp"
             android:gravity="center">
             <TextView
-                android:id="@+id/join_lobby_player4_id"
+                android:id="@+id/host_lobby_player4_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="ID: "
-                android:textColor="@color/colorPrimaryDark"
-
-                android:textSize="20dp">
+                android:textSize="35dp">
             </TextView>
             <ImageView
-                android:id="@+id/join_lobby_player4_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:id="@+id/host_lobby_player4_profile"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
     </LinearLayout>
-<TextView
-    android:id="@+id/jointv"
-    android:layout_width="340dp"
-    android:layout_height="90dp"
-    android:textColor="@color/colorPrimaryDark"
-    android:text="Waiting for Players..."
-    android:textSize="35dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:layout_marginBottom="30dp"
-    >
 
-</TextView>
+    <Button
+        android:id="@+id/hoststart"
+        style="@style/WhiteTextTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginBottom="128dp"
+        android:layout_weight="1"
+        android:onClick="startGameButton"
+
+        android:text="START"
+
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </Button>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

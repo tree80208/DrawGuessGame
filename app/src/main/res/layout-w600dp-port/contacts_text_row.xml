@@ -12,10 +12,10 @@
     <TextView
         android:id="@+id/contacts_row_item"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="100dp"
 
         android:layout_margin="20dp"
-        android:textSize="40dp"
+        android:textSize="50dp"
         android:textColor="@color/colorPrimaryDark"
         />
 

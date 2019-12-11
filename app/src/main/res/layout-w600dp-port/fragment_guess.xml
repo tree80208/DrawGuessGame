@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         tools:context=".MainActivity">
 
         <LinearLayout
@@ -29,6 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Player One"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -37,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Player Two"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -45,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Player Three"
+                android:textSize="25dp"
                 android:textStyle="bold" />
 
             <TextView
@@ -53,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Player Four"
+                android:textSize="25dp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -60,34 +64,34 @@
             android:id="@+id/usersImageLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
+            android:weightSum="4"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cat" />
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cat" />
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cat" />
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cat" />
 
@@ -95,42 +99,47 @@
 
         <LinearLayout
             android:id="@+id/scoresLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:weightSum="4">
 
             <TextView
                 android:id="@+id/scoreone"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="25dp"
                 android:text="Score: 1000" />
 
             <TextView
                 android:id="@+id/scoretwo"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="25dp"
                 android:text="Score: 999" />
 
             <TextView
                 android:id="@+id/scorethree"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="25dp"
                 android:text="Score: 992" />
 
             <TextView
                 android:id="@+id/scorefour"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="25dp"
                 android:text="Score: 0" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/wordTimerLayout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:weightSum="5">
@@ -149,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Attempt to guess what the drawer is drawing"
-                android:textSize="20dp" />
+                android:textSize="25dp" />
 
             <TextView
                 android:id="@+id/timerText"
@@ -157,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="seconds remaining: 60"
-                android:textSize="18sp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -165,7 +174,7 @@
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="match_parent"
-            android:layout_height="450dp"
+            android:layout_height="545dp"
             android:layout_weight="0"
             app:srcCompat="@drawable/ic_launcher_background" />
 
@@ -179,6 +188,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:textSize="25dp"
                 android:inputType="textPersonName"
                 android:text="Guess word" />
 
@@ -187,6 +197,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="25dp"
                 android:text="Enter" />
         </LinearLayout>
 

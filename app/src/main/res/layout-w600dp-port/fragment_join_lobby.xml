@@ -17,22 +17,23 @@
         android:layout_weight="1"
         android:text="ROOM CODE:"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toTopOf="@id/hostid"
+        android:textSize="60dp"
+        app:layout_constraintBottom_toTopOf="@+id/hostplayerlist"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.244"></TextView>
 
     <TextView
         android:id="@+id/hostid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-        android:textSize="25dp"
+        android:layout_marginTop="60dp"
+        android:textSize="45dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,12 +64,12 @@
                 android:layout_height="wrap_content"
                 android:text="ID: "
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20dp">
+                android:textSize="40dp">
             </TextView>
             <ImageView
                 android:id="@+id/join_lobby_player1_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
@@ -86,12 +87,12 @@
                 android:text="ID: "
                 android:textColor="@color/colorPrimaryDark"
 
-                android:textSize="20dp">
+                android:textSize="40dp">
             </TextView>
             <ImageView
                 android:id="@+id/join_lobby_player2_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
@@ -109,12 +110,12 @@
                 android:text="ID: "
                 android:textColor="@color/colorPrimaryDark"
 
-                android:textSize="20dp">
+                android:textSize="40dp">
             </TextView>
             <ImageView
                 android:id="@+id/join_lobby_player3_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
@@ -123,7 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="30dp"
             android:gravity="center">
             <TextView
                 android:id="@+id/join_lobby_player4_id"
@@ -132,28 +133,30 @@
                 android:text="ID: "
                 android:textColor="@color/colorPrimaryDark"
 
-                android:textSize="20dp">
+                android:textSize="40dp">
             </TextView>
             <ImageView
                 android:id="@+id/join_lobby_player4_profile"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
                 android:background="@color/colorPrimaryDark">
             </ImageView>
         </LinearLayout>
     </LinearLayout>
-<TextView
-    android:id="@+id/jointv"
-    android:layout_width="340dp"
-    android:layout_height="90dp"
-    android:textColor="@color/colorPrimaryDark"
-    android:text="Waiting for Players..."
-    android:textSize="35dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    android:layout_marginBottom="30dp"
-    >
 
-</TextView>
+    <TextView
+        android:id="@+id/jointv"
+        android:layout_width="349dp"
+        android:layout_height="142dp"
+        android:layout_marginBottom="140dp"
+        android:text="Waiting for Players..."
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
 </androidx.constraintlayout.widget.ConstraintLayout>

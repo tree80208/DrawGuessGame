@@ -21,7 +21,7 @@
         android:layout_marginTop="30dp"
         android:layout_weight="1"
         android:text="ROOM CODE"
-        android:textSize="30dp"
+        android:textSize="50dp"
         >
     </TextView>
 
@@ -135,19 +135,25 @@
             </ImageView>
         </LinearLayout>
     </LinearLayout>
+
     <Button
         android:id="@+id/hoststart"
+        style="@style/WhiteTextTheme"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_marginBottom="128dp"
         android:layout_weight="1"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
-        android:text="START"
-
         android:onClick="startGameButton"
 
+        android:text="START"
+
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginBottom="30dp">
+        app:layout_constraintStart_toStartOf="parent">
 
     </Button>
 
