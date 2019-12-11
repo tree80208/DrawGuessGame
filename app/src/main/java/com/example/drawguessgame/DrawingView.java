@@ -24,11 +24,13 @@ public class DrawingView extends View {
 
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
+    private DatabaseReference pathRef;
 
     public DrawingView(Context context, AttributeSet attrs){
         super(context,attrs);
         setupDrawing();
         database = FirebaseDatabase.getInstance();
+        pathRef = database.getReference("DrawPaths");
 
         this.setBackgroundColor(getColor(R.color.colorWhite));
     }
@@ -38,20 +40,17 @@ public class DrawingView extends View {
         float touchX = event.getX();
         float touchY = event.getY();
 
-        DatabaseReference pathRef = database.getReference("TransferPaths");
-
-
         switch(event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                drawPath.moveTo(touchX,touchY);
+                drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                drawPath.lineTo(touchX,touchY);
+                drawPath.lineTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_UP:
-                drawPath.lineTo(touchX,touchY);
-                pathRef.child("P").push().setValue(drawPath+"$$$"+drawPaint);
-                drawCanvas.drawPath(drawPath,drawPaint);
+                drawPath.lineTo(touchX, touchY);
+                pathRef.setValue(touchX+"%%%"+touchY+"%%%"+paintSize+"%%%"+paintColor+"%%%"+drawPath);
+                drawCanvas.drawPath(drawPath, drawPaint);
                 drawPath.reset();
                 break;
             default:
@@ -97,8 +96,6 @@ public class DrawingView extends View {
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
-
-
     public void startNew(){
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
@@ -108,7 +105,6 @@ public class DrawingView extends View {
         return canvasBitmap;
     }
 
-
     /**
      * This function gets color with getResource on R.id.color_name
      * @param colorID
@@ -117,4 +113,6 @@ public class DrawingView extends View {
     public int getColor(int colorID){
         return ContextCompat.getColor(getContext(), colorID);
     }
+
+
 }

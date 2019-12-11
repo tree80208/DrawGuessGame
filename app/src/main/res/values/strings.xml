@@ -30,6 +30,9 @@
     <string name="button_share">SHARE</string>
     <string name="button_clear">CLEAR</string>
     <string name="button_eraser">Eraser</string>
+    <string name="button_switch">Switch</string>
+    <string name="button_end">End</string>
+
     <!--    DRAW ACTIVITY <END>-->
 
 

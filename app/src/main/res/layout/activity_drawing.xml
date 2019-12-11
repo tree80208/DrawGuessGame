@@ -131,28 +131,28 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 1000" />
+                android:text="Score: -1" />
 
             <TextView
                 android:id="@+id/scoretwo"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 999" />
+                android:text="Score: -1" />
 
             <TextView
                 android:id="@+id/scorethree"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 992" />
+                android:text="Score: -1" />
 
             <TextView
                 android:id="@+id/scorefour"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 0" />
+                android:text="Score: -1" />
         </LinearLayout>
 
         <LinearLayout
@@ -301,6 +301,24 @@
                 android:text="@string/button_eraser"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/switchFrag"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="switchFrag"
+                android:text="@string/button_switch"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <Button
+                android:id="@+id/endGame"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="endGame"
+                android:text="@string/button_end"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         </LinearLayout>
 

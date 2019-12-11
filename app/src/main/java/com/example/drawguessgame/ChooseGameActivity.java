@@ -309,11 +309,11 @@ public class ChooseGameActivity extends AppCompatActivity {
     }
 
     public void startGameButton(View v){
-
-//
         myRef.child("Room").child(roomName).child("start").setValue(true);
+        myRef.child("Turn").setValue("host");
+        myRef.child("guessWord").setValue(guessingWords.get(0));
 
-        Intent intent = new Intent(this,DrawingActivity.class);
+        Intent intent = new Intent(this, DrawingActivity.class);
         intent.putStringArrayListExtra("guessingWords", guessingWords);
         startActivity(intent);
     }

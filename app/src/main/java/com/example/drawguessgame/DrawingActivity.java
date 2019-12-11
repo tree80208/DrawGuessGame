@@ -29,6 +29,9 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
@@ -39,6 +42,8 @@ import java.util.List;
 public class DrawingActivity extends AppCompatActivity {
     public static DrawingFragment drawingFragment = null;
     // Color available, default = red
+    private FirebaseDatabase database;
+
     int[] color_arr = {R.color.colorRed, R.color.colorGreen, R.color.colorBlue,
             R.color.colorPurple, R.color.aqua, R.color.pink, R.color.grey, R.color.orange,
             R.color.colorWhite};
@@ -56,13 +61,13 @@ public class DrawingActivity extends AppCompatActivity {
         timer();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.draw_layout,drawingFragment);
+        transaction.add(R.id.draw_layout, drawingFragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void timer(){
-        new CountDownTimer(90000, 1000) {
+        new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 TextView tv = (TextView) findViewById(R.id.timerText);
@@ -71,12 +76,36 @@ public class DrawingActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-            //TODO: DO something even timer is up.
+                Intent intent = new Intent(DrawingActivity.this, GuesserActivity.class);
+                startActivity(intent);
+//                if(turn.toString() == "host"){
+////                    Intent intent = new Intent(DrawingActivity.this, DrawingActivity.class);
+////                    startActivity(intent);
+//                }if(turn.toString() == "playerTwo"){
+//                    Intent intent = new Intent(DrawingActivity.this, GuesserActivity.class);
+//                    startActivity(intent);
+//                }if(turn.toString() == "end"){
+//                    Intent intent = new Intent(DrawingActivity.this, LeaderBoardActivity.class);
+//                    startActivity(intent);
+//                }
+
             }
         }.start();
+    }
 
+    public void switchFrag(View v){
+        System.out.println("switch clicked, guesserActivity start");
+        Intent intent = new Intent(this, GuesserActivity.class);
+        startActivity(intent);
 
     }
+
+    public void endGame(View v){
+        System.out.println("end clicked, leaderBoardActivity start");
+        Intent intent = new Intent(this, LeaderBoardActivity.class);
+        startActivity(intent);
+    }
+
 
     public void updateFields(){
         //TODO:fetch and update player names, images, scores, and word
@@ -84,19 +113,10 @@ public class DrawingActivity extends AppCompatActivity {
         TextView p1 = (TextView)findViewById(R.id.playerOneName);
         p1.setText(username);
 
-
-
-//        String word = getIntent().getStringExtra("wordsList");
-
         ArrayList<String> guessingwords = getIntent().getExtras().getStringArrayList("guessingWords");
         System.out.println("guessingWords: " + guessingwords);
         TextView guessWord = (TextView) findViewById(R.id.guessWord);
         guessWord.setText("Draw: " + guessingwords.get(0));
-//        ArrayList<String> test = getIntent().getExtras().getStringArrayList("wordsList");
-
-//        TextView wordDisplay = (TextView) findViewById(R.id.guessWord);
-//        wordDisplay.setText(wordsList.get(0));
-//        System.out.println("words list from previous intent" + wordsList);
 
     }
 

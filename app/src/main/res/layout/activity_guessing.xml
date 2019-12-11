@@ -79,7 +79,7 @@
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="75dp"
-                android:layout_height="75dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/cat" />
 
@@ -103,70 +103,89 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 1000" />
+                android:text="Score: -1" />
 
             <TextView
                 android:id="@+id/scoretwo"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 999" />
+                android:text="Score: -1" />
 
             <TextView
                 android:id="@+id/scorethree"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 992" />
+                android:text="Score: -1" />
 
             <TextView
                 android:id="@+id/scorefour"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Score: 0" />
+                android:text="Score: -1" />
         </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:id="@+id/wordTimerLayout"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:weightSum="5">-->
+
+<!--            &lt;!&ndash;                <TextView&ndash;&gt;-->
+<!--            &lt;!&ndash;                    android:id="@+id/guessWord"&ndash;&gt;-->
+<!--            &lt;!&ndash;                    android:layout_width="wrap_content"&ndash;&gt;-->
+<!--            &lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--            &lt;!&ndash;                    android:layout_weight="1"&ndash;&gt;-->
+<!--            &lt;!&ndash;                    android:text="Attempt to draw: House"&ndash;&gt;-->
+<!--            &lt;!&ndash;                    android:textSize="18sp" />&ndash;&gt;-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/Instructions"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:text="Attempt to guess what the drawer is drawing"-->
+<!--                android:textSize="20dp" />-->
+
+<!--&lt;!&ndash;            <TextView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/timerText"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:text="seconds remaining: 60"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textSize="18sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:textStyle="bold" />&ndash;&gt;-->
+
+<!--        </LinearLayout>-->
+
 
         <LinearLayout
-            android:id="@+id/wordTimerLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:weightSum="5">
-
-            <!--                <TextView-->
-            <!--                    android:id="@+id/guessWord"-->
-            <!--                    android:layout_width="wrap_content"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:layout_weight="1"-->
-            <!--                    android:text="Attempt to draw: House"-->
-            <!--                    android:textSize="18sp" />-->
-
-            <TextView
-                android:id="@+id/Instructions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Attempt to guess what the drawer is drawing"
-                android:textSize="20dp" />
-
-            <TextView
-                android:id="@+id/timerText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="seconds remaining: 60"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/draw_layout"
             android:layout_width="match_parent"
             android:layout_height="450dp"
-            android:layout_weight="0"
-            app:srcCompat="@drawable/ic_launcher_background" />
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/wordTimerLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:id="@+id/timerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="seconds remaining: 60"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

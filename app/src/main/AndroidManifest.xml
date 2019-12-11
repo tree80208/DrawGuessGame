@@ -34,6 +34,8 @@
         <activity android:name=".LeaderBoardActivity"></activity>
         <activity android:name=".DrawingActivity" />
         <activity android:name=".ChooseGameActivity" />
+        <activity android:name=".GuesserActivity" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
