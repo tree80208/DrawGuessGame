@@ -1,32 +1,19 @@
 package com.example.drawguessgame;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Environment;
 import android.provider.ContactsContract;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,14 +35,14 @@ public class DrawingActivity extends AppCompatActivity {
     // Color available, default = red
     private FirebaseDatabase database;
 
-    int[] color_arr = {R.color.colorRed, R.color.colorGreen, R.color.colorBlue,
-            R.color.colorPurple, R.color.aqua, R.color.pink, R.color.grey, R.color.orange,
-            R.color.colorWhite};
+    int[] color_arr = {R.color.colorRed, R.color.colorGreen, R.color.colorBlue, R.color.colorPurple,
+            R.color.aqua, R.color.pink, R.color.grey, R.color.orange, R.color.colorWhite};
     float[] size_arr = {15,30,60};
     private Object currentHost;
     private Object currentUser;
     private FirebaseAuth mAuth;
     private String currentUserID;
+    private String word;
 
 
     @Override
@@ -67,38 +54,34 @@ public class DrawingActivity extends AppCompatActivity {
         currentUser = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
         currentUserID = mAuth.getUid();
-        
-        System.out.println("mauth id= " + mAuth.getUid());
-        System.out.println("host = " + currentHost);
-//
-        String testHost = getIntent().getStringExtra("Host");
-        String playertwo = getIntent().getStringExtra("playerTwoID");
-//
-        System.out.println("testhost id= " + testHost);
-        System.out.println("playertwo test = " + playertwo);
 
-        if(currentUserID.equals(testHost) && !playertwo.equals(testHost)){
+        String startingHost = getIntent().getStringExtra("startingHost");
+        word = getIntent().getStringExtra("word");
+        updateFields();
+
+
+
+        if(currentUserID.equals(startingHost)){
             this.drawingFragment = new DrawingFragment();
             drawingFragment.setContainerActivity(this);
 //            updateFields();
-//            timer();
+            timer(startingHost);
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.add(R.id.draw_layout, drawingFragment);
             transaction.addToBackStack(null);
             transaction.commit();
+
+
+        }else if(startingHost.equals("-1")){
+            Intent intent = new Intent(this, GuesserActivity.class);
+            startActivity(intent);
+            timer(startingHost);
+
         }
-//        fetchDrawingLines();
-//        this.drawingFragment = new DrawingFragment();
-//        drawingFragment.setContainerActivity(this);
-//        updateFields();
-//        timer();
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.add(R.id.draw_layout, drawingFragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
+
     }
 
-    public void timer(){
+    public void endTimer(){
         new CountDownTimer(30000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
@@ -108,18 +91,52 @@ public class DrawingActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(DrawingActivity.this, GuesserActivity.class);
-                startActivity(intent);
-//                if(turn.toString() == "host"){
-////                    Intent intent = new Intent(DrawingActivity.this, DrawingActivity.class);
-////                    startActivity(intent);
-//                }if(turn.toString() == "playerTwo"){
-//                    Intent intent = new Intent(DrawingActivity.this, GuesserActivity.class);
-//                    startActivity(intent);
-//                }if(turn.toString() == "end"){
-//                    Intent intent = new Intent(DrawingActivity.this, LeaderBoardActivity.class);
-//                    startActivity(intent);
-//                }
+                switchToEnd();
+            }
+        }.start();
+
+    }
+
+    public void switchToGuess(){
+        Intent intent = new Intent(this, GuesserActivity.class);
+        startActivity(intent);
+        endTimer();
+
+    }
+
+    public void switchToEnd(){
+        Intent intent = new Intent(this, LeaderBoardActivity.class);
+        startActivity(intent);
+    }
+
+    public void switchToDraw(){
+        Intent intent = new Intent(this, DrawingActivity.class);
+        startActivity(intent);
+        endTimer();
+
+    }
+
+    public void timer(final String startingHost){
+        new CountDownTimer(30000, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                TextView tv = (TextView) findViewById(R.id.timerText);
+                tv.setText(" Seconds Remaining: " + millisUntilFinished/1000);
+            }
+
+            @Override
+            public void onFinish() {
+//                System.out.println("@@@@"+currentUserID+"@@@"+startingHost);
+//                System.out.println(currentUserID.equals(startingHost));
+                if(currentUserID.equals(startingHost)){
+                    switchToGuess();
+                }else if(startingHost.equals("-1")){
+                    switchToDraw();
+                }
+//                Intent intent = new Intent(DrawingActivity.this, LeaderBoardActivity.class);
+//                startActivity(intent);
+
+
 
             }
         }.start();
@@ -141,14 +158,17 @@ public class DrawingActivity extends AppCompatActivity {
 
     public void updateFields(){
         //TODO:fetch and update player names, images, scores, and word
-        String username = getIntent().getStringExtra("p1");
+        String username = getIntent().getStringExtra("p1Display");
         TextView p1 = (TextView)findViewById(R.id.playerOneName);
         p1.setText(username);
 
         ArrayList<String> guessingwords = getIntent().getExtras().getStringArrayList("guessingWords");
         System.out.println("guessingWords: " + guessingwords);
+
+
+        System.out.println("word ========="+word);
         TextView guessWord = (TextView) findViewById(R.id.guessWord);
-        guessWord.setText("Draw: " + guessingwords.get(0));
+        guessWord.setText("Draw: " + word);
 
     }
 
@@ -294,6 +314,25 @@ public class DrawingActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 //TODO: info is a temp variable....
+//                Object info = snapshot.getValue();
+                currentHost = snapshot.getValue();
+//                System.out.println("HOST NAME%%%%%%%%"+info);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed");
+            }
+        });
+
+    }
+
+    public void fetchWord(){
+        DatabaseReference dbWords = database.getReference().child("guessWord");
+        dbWords.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                //TODO: info is a temp variable....
                 Object info = snapshot.getValue();
                 currentHost = snapshot.getValue();
                 System.out.println("HOST NAME%%%%%%%%"+info);
@@ -307,4 +346,59 @@ public class DrawingActivity extends AppCompatActivity {
 
     }
 
+
+
 }
+
+
+
+//        System.out.println("mauth id= " + mAuth.getUid());
+//        System.out.println("host = " + currentHost);
+////
+//        String testHost = getIntent().getStringExtra("Host");
+//        String playertwo = getIntent().getStringExtra("playerTwoID");
+////
+//        System.out.println("testhost id= " + testHost);
+//        System.out.println("playertwo test = " + playertwo);
+//
+//        if(currentUserID.equals(testHost) && !playertwo.equals(testHost)){
+//            this.drawingFragment = new DrawingFragment();
+//            drawingFragment.setContainerActivity(this);
+////            updateFields();
+////            timer();
+//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//            transaction.add(R.id.draw_layout, drawingFragment);
+//            transaction.addToBackStack(null);
+//            transaction.commit();
+//        }
+
+
+
+//                if(currentUserID.equals(startingHost)){
+//                    this.drawingFragment = new DrawingFragment();
+//                    drawingFragment.setContainerActivity(this);
+//                    updateFields();
+//                    timer();
+//                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+//                    transaction.add(R.id.draw_layout, drawingFragment);
+//                    transaction.addToBackStack(null);
+//                    transaction.commit();
+//
+//
+//                }else if(startingHost.equals("-1")){
+//                    Intent intent = new Intent(this, DrawingActivity.this);
+//                    startActivity(intent);
+//
+//                }
+
+
+//                if(turn.toString() == "host"){
+////                    Intent intent = new Intent(DrawingActivity.this, DrawingActivity.class);
+////                    startActivity(intent);
+//                }if(turn.toString() == "playerTwo"){
+//                    Intent intent = new Intent(DrawingActivity.this, GuesserActivity.class);
+//                    startActivity(intent);
+//                }if(turn.toString() == "end"){
+//                    Intent intent = new Intent(DrawingActivity.this, LeaderBoardActivity.class);
+//                    startActivity(intent);
+//                }

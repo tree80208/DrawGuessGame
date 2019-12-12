@@ -68,6 +68,8 @@ public class GuessingFragment extends Fragment {
                     float yCord = Float.parseFloat(arr[1]);
                     float size = Float.parseFloat(arr[2]);
                     float color = Float.parseFloat(arr[3]);
+
+//                    finalColor = color
                     System.out.println(xCord);
                     System.out.println(yCord);
                     System.out.println(size);

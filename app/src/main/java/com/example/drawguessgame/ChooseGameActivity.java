@@ -58,7 +58,7 @@ public class ChooseGameActivity extends AppCompatActivity {
     TypeCodeFragment codeFragment;
     String roomName;
     HashMap<String,HashMap<String,String>> party;
-    List<String> apiWords = Arrays.asList("Sunglasses", "Orange", "House");
+    List<String> apiWords = Arrays.asList("Sunglasses", "Orange", "House", "Bike", "sun");
     ArrayList<String> guessingWords = new ArrayList<>();
     SoundRunnable soundRunnable;
 
@@ -66,6 +66,7 @@ public class ChooseGameActivity extends AppCompatActivity {
 
     JSONObject jsonObject;
     private String currHost;
+    private String startingHost;
 
 
     @Override
@@ -103,7 +104,6 @@ public class ChooseGameActivity extends AppCompatActivity {
 
 
     public void setGuessingWords(){
-//        TODO:Fetch API Words here
         DatabaseReference wordRef = database.getReference("EasyWords");
         wordRef.setValue(apiWords);
     }
@@ -154,8 +154,6 @@ public class ChooseGameActivity extends AppCompatActivity {
 
         (new Thread(soundRunnable)).start();
     }
-
-
 
     public void createGame(View v){
         createRoomName();
@@ -237,6 +235,7 @@ public class ChooseGameActivity extends AppCompatActivity {
         ImageView player4profile = findViewById(R.id.join_lobby_player4_profile);
         DatabaseReference phoneNumberRef = myRef.child("Room").child("ABetterRoomName").child("Players");
         TextView[] tv = new TextView[4];tv[0]=player1name;tv[1]=player2name;tv[2]=player3name;tv[3]=player4name;
+
         int i = 0;
         for (String el : party.keySet()){
             System.out.println(tv.toString());
@@ -244,6 +243,7 @@ public class ChooseGameActivity extends AppCompatActivity {
             tv[i].setText(party.get(el).get("displayName"));
             i++;
         }
+
     }
     public void joinGame(View v){
         if(myRef.child("Room/"+this.roomName+"/").equals("https://drawguessgame-19fe2.firebaseio.com/Room/null")){
@@ -275,7 +275,6 @@ public class ChooseGameActivity extends AppCompatActivity {
         users.put(path, new UserProfile(currentUser.getDisplayName(),"0"));
         myRef.updateChildren(users);
 
-
         myRef.child("Room").child(roomName).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -289,7 +288,7 @@ public class ChooseGameActivity extends AppCompatActivity {
                         if(jsonObject.getJSONObject("Room").getJSONObject(roomName).getBoolean("start")){
                             Intent intent = new Intent(itself,DrawingActivity.class);
                             intent.putStringArrayListExtra("guessingWords", guessingWords);
-                            intent.putExtra("playerTwoID", currentUser.getUid());
+                            intent.putExtra("startingHost", "-1");
                             startActivity(intent);
                         }
                     }
@@ -313,14 +312,19 @@ public class ChooseGameActivity extends AppCompatActivity {
 
     public void startGameButton(View v){
         myRef.child("Room").child(roomName).child("start").setValue(true);
-        System.out.println("start button ===== id"+currentUser.getUid());
         myRef.child("Host").setValue(currentUser.getUid());
         myRef.child("guessWord").setValue(guessingWords.get(0));
-        currHost = currentUser.getUid();
+        startingHost = currentUser.getUid();
+
+//        List<String> list = Arrays.asList("HJLW32","PIPF42","GLID54");
+        Collections.shuffle(guessingWords);
+        Object word = guessingWords.get(0);
 
         Intent intent = new Intent(this, DrawingActivity.class);
         intent.putStringArrayListExtra("guessingWords", guessingWords);
-        intent.putExtra("currHost", currentUser.getUid());
+        intent.putExtra("p1Display", currentUser.getDisplayName());
+        intent.putExtra("word", word.toString());
+        intent.putExtra("startingHost", currentUser.getUid());
 
         startActivity(intent);
     }
