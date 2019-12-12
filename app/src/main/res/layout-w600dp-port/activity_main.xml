@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/title_page"
-        />
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,7 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="278dp" />
+        app:layout_constraintGuide_begin="224dp" />
 
     <EditText
         style="@style/WhiteTextTheme"
@@ -105,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="491dp" />
+        app:layout_constraintGuide_begin="404dp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="598dp"
@@ -137,7 +139,7 @@
             style="@style/WhiteTextTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="30dp"
             android:onClick="registerAccount"
 
             android:text="@string/main_register_text"
@@ -153,8 +155,8 @@
             style="@style/WhiteTextTheme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="45dp"
-            android:onClick="registerAccount"
+            android:layout_marginTop="30dp"
+            android:onClick="clickHelpPage"
 
             android:text="@string/main_help"
 
@@ -167,12 +169,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <FrameLayout
         android:id="@+id/screen1_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="50dp"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.31" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

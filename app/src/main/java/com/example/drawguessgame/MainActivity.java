@@ -79,14 +79,14 @@ public class MainActivity extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         System.out.println("MainActivity: onResume");
-//        playBackgroundMusic();
+        playBackgroundMusic();
     }
 
     @Override
     public void onPause(){
         super.onPause();
         System.out.println("MainActivity: onPause");
-//        stopBackgroundMusic();
+        stopBackgroundMusic();
     }
 
     public void stopBackgroundMusic(){
@@ -153,6 +153,16 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    public void clickHelpPage(View v){
+        HelpFragment help = new HelpFragment();
+        help.setContainerActivity(this);
+        getSupportFragmentManager().beginTransaction()
+                .setCustomAnimations(R.anim.translate_right_left, R.anim.end_right_left
+                        ,R.anim.translate_left_right, R.anim.end_left_right)
+                .add(R.id.screen1_frame,help,"HELP")
+                .addToBackStack(null)
+                .commit();
+    }
     public void signUpNewAccount(View view) {
         String email = ((EditText)findViewById(R.id.screen1_register_edit_text_id)).getText().toString();
         String password = ((EditText)findViewById(R.id.screen1_register_edit_text_pwd)).getText().toString();

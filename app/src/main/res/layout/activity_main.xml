@@ -155,7 +155,7 @@
             android:textSize="20dp"
             android:text="@string/main_help"
 
-            android:onClick="registerAccount"
+            android:onClick="clickHelpPage"
 
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/screen1_button_register"
